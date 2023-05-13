@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <script type="text/javascript" src="references.js"></script>
+        <script type="text/javascript" src="createRefFile.js"></script>
         <title>Mes références</title>
         <meta charset="utf-8">
     </head>
@@ -53,8 +53,8 @@
 
             $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
 
-            echo "<table>";
-            echo "<td><tr>".'<input type="checkbox" value="'.$ref_id.'">'."</tr></td>";
+            echo "<div id=all_".$ref_id."><table>";
+            echo "<td><tr>".'<input type="checkbox" id="'.$ref_id.'">'."</tr></td>";
             foreach($_GET["ref_content"] as $ref_content){
                 if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){ //List of knowledge has to be displayed with the show_list_of_knowledge function.
                     echo "<tr><td>".$ref_content."</td><td>";
@@ -64,7 +64,7 @@
                     echo "<tr><td>".$ref_content."</td><td>".fgets($file)."</td></tr>";
                 }
             }
-            echo "</table>";
+            echo "</table></div>";
             echo "</br>";
 
             fclose($file);
@@ -82,13 +82,19 @@
                 echo "Vous n'avez pas de références à choisir<br/>";
                 echo "Veuillez en créer<br/>";
             } else {
-                echo 'Voici les références que vous pouvez choisir :<br/><br/>';
-                echo "<form method='post' action='javascript:create_PDF()'>";
+                echo '<div id="intro">Voici les références que vous pouvez choisir :</div><br/><br/>';
+                echo "<form method='post' action='javascript:create_file()'>";
                 foreach($file_names as $ref_id){
                     show_ref($ref_id);
                 }
-                echo "<button type='submit' name='boutton'>Valider</button>";
+
+                //Ask the user the format (HTML or PDF).
+                echo "<div id=choice>";
+                echo '<input type="radio" name="drone" value="HTML" id="HTML" checked><label for="HTML">HTML</label>';
+                echo '<input type="radio" name="drone" value="PDF" id="PDF"><label for="PDF">PDF</label>';
+                echo "<button type='submit' name='boutton' id='html'>Valider</button>";
                 echo "</form>";
+                echo "</div>";
             }
         }
 
