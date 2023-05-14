@@ -1,7 +1,7 @@
 function nb_zero(i){
-    //.
     // i : (int).
-    //Return.
+    //Return a string ("00" or "0") depending on i's number of figures.
+
     if(i<10){
         return "00";
     } else if(i<100){
@@ -12,22 +12,34 @@ function nb_zero(i){
 }
 
 function create_HTML(){
-    //Hide the unchecked references
+    //Create a new window with the chosen references
 
+    let MyW=window.open("");
+    let html="<head><title>Mes références</title>";
+    html+="<meta charset='utf-8'></head>";
+    html+="<body><h1>Mes références</h1>";
+
+    //Add the text of chosen references to html variable
     for(let i=1; i<3; i++){
         let ref_id="ref"+nb_zero(i)+i+".txt";
-        console.log("ref_id : "+ref_id);
-
-        //Hide the references not chosen
-        if(document.getElementById(ref_id).checked==false){
-            document.getElementById("all_"+ref_id).style.display = "none";
+        if(document.getElementById(ref_id).checked==true){
+            html+=document.getElementById("text_"+ref_id).innerHTML;
         }
-
-        document.getElementById(ref_id).hidden=true; //Hide the check boxes
     }
+    html+="</body>";
+
+    //Fill the new window
+    MyW.document.open();
+    MyW.document.write(html);
+    MyW.document.close();
+
+    //Alert the user, that he created his html page
+    document.getElementById("alert").innerHTML="Vous avez créer une page HTML.</br>";
 }
 
 function create_PDF(){
+    //
+
     console.log("PDF");
 }
 
@@ -39,9 +51,5 @@ function create_file(){
         create_HTML();
     } else {
         create_PDF();
-    }
-
-    //Hide the buttons descritpion and buttons
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("choice").style.display = "none";
+    }    
 }
