@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
         <script type="text/javascript" src="createRefFile.js"></script>
         <title>Mes références</title>
         <meta charset="utf-8">
@@ -9,7 +10,7 @@
     
     <body>
         <h1>Mes références</h1>
-        <div id="alert"></div>
+        <div id="alert"><!--Space to notice if a page or a file has been created or not--></div>
 
         <?php
 
@@ -22,7 +23,7 @@
             2 => "Milieu",
             3 => "Données personnelles du référent",
             4 => "Adresse e-meil du référent",
-            5 => "Liste des savoirs-êtres et savoirs-faire démontrés durant l'engagement"
+            5 => "Savoirs-êtres et savoirs-faire démontrés durant l'engagement"
         );
 
         function show_list_of_knowledge($list){
@@ -39,9 +40,9 @@
 
                 } else { //Is the knowledge validated by the referer ?
                     $i++;
-                    if($list[$i]=='0'){ //No : create an uncheck checkbox.
+                    if($list[$i]=='0'){ //No : create an uncheck checkbox
                         echo '<input type="checkbox" disabled>';
-                    } elseif($list[$i]=='1') { //Yes : create a check checkbox.
+                    } elseif($list[$i]=='1') { //Yes : create a check checkbox
                         echo '<input type="checkbox" checked disabled>';
                     }
                 }
@@ -74,7 +75,7 @@
         function show_all_ref(){
             //Create a list of references that the student can choose.
             
-            //Get the file of references' names
+            //Get the names of references' file
             $file_names=scandir($_GET["folder"].'/'.$_GET["user_id"].'/');
             $file_names=array_diff($file_names,[".","..","user.txt"]);
 
@@ -93,7 +94,7 @@
                 echo "<div id=choice>";
                 echo '<input type="radio" name="drone" value="HTML" id="HTML" checked><label for="HTML">HTML</label>';
                 echo '<input type="radio" name="drone" value="PDF" id="PDF"><label for="PDF">PDF</label>';
-                echo "<button type='submit' name='boutton' id='html'>Valider</button>";
+                echo "<button type='submit' name='boutton' id='valider' value='".count($file_names)."'>Valider</button>";
                 echo "</form>";
                 echo "</div>";
             }
