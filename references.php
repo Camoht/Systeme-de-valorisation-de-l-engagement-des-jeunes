@@ -9,9 +9,11 @@
     
     <body>
         <h1>Mes références</h1>
+        <div id="alert"></div>
 
         <?php
 
+        //!Constantes sensées être obtenue plus tôt... J'ai supposées qu'elles seraient sous ce format...!
         $_GET["folder"]="Data";
         $_GET["user_id"]="003";
         $_GET["ref_content"]=array (
@@ -53,8 +55,7 @@
 
             $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
 
-            echo "<div id=all_".$ref_id."><table>";
-            echo "<td><tr>".'<input type="checkbox" id="'.$ref_id.'">'."</tr></td>";
+            echo '<input type="checkbox" id="'.$ref_id.'">'."<div id='text_".$ref_id."'><table>";
             foreach($_GET["ref_content"] as $ref_content){
                 if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){ //List of knowledge has to be displayed with the show_list_of_knowledge function.
                     echo "<tr><td>".$ref_content."</td><td>";
