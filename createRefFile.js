@@ -22,7 +22,6 @@ function create_HTML(){
 
     //Add the text of chosen references to html variable
     for(let i=1; i<=document.getElementById('valider').value; i++){
-        console.log(i);
         let ref_id="ref"+nb_zero(i)+i+".txt";
         if(document.getElementById(ref_id).checked==true){
             html+=document.getElementById("text_"+ref_id).innerHTML;
@@ -36,11 +35,12 @@ function create_HTML(){
     MyW.document.close();
 
     //Alert the user, that he created his html page
-    document.getElementById("alert").innerHTML="Vous avez créer une page HTML.</br>";
+    document.getElementById("alert").innerHTML="Vous avez créé une page HTML.</br>";
 }
 
 function create_PDF(){
     //Create a PDF file with the chosen references.
+    //Inspired with : https://codepen.io/amkid/pen/qKYwXo
 
     //Setting the PDF file
     var pdf = new jsPDF({
@@ -51,22 +51,31 @@ function create_PDF(){
     });
     pdf.setFont("helvetica");
     pdf.setFontSize(9);
+    pdf.setTextColor(0,0,0);
 
-    //Add the text of chosen references to text variable
-    let text="";
+    var specialElementHandlers = {
+        'tr' : function (element, renderer){
+            renderer.setFontStyle('normal');
+        }
+    };
+
+    //Add the text of chosen references to the PDF file
+    let nb_pages=0;
     for(let i=1; i<=document.getElementById('valider').value; i++){
+        console.log(i);
         let ref_id="ref"+nb_zero(i)+i+".txt";
         if(document.getElementById(ref_id).checked==true){
-            text+=document.getElementById("text_"+ref_id).innerText;
+            pdf.fromHTML(document.getElementById("text_"+ref_id).innerHTML, 5, -5+500*nb_pages,{
+                'elementsHandlers' : specialElementHandlers
+            });
+            nb_pages++;
+            console.log("nb_pages"+nb_pages);
         }
     }
-
-    //Fill the new PDF file
-    pdf.text(text, 20, 20);
-    pdf.save('Mes_references.pdf');
+    pdf.save('MesReferences.pdf');
 
     //Alert the user, that he created his PDF file
-    document.getElementById("alert").innerHTML="Vous avez créer une page HTML.</br>";
+    document.getElementById("alert").innerHTML="Vous avez créé un fichier PDF.</br>";
 }
 
 function create_file(){
