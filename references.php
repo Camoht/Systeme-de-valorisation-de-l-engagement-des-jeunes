@@ -3,6 +3,7 @@
 <html>
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+        <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
         <script type="text/javascript" src="createRefFile.js"></script>
         <title>Mes références</title>
         <meta charset="utf-8">
@@ -18,7 +19,7 @@
         $_GET["folder"]="Data";
         $_GET["user_id"]="003";
         $_GET["ref_content"]=array (
-            0 => "Descritpion",
+            0 => "Description",
             1 => "Durée",
             2 => "Milieu",
             3 => "Données personnelles du référent",
@@ -57,8 +58,9 @@
             $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
 
             echo '<input type="checkbox" id="'.$ref_id.'">'."<div id='text_".$ref_id."'><table>";
+            echo "<th></th>";
             foreach($_GET["ref_content"] as $ref_content){
-                if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){ //List of knowledge has to be displayed with the show_list_of_knowledge function.
+                if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){ //List of knowledge (last line of references' files) has to be displayed with the show_list_of_knowledge function.
                     echo "<tr><td>".$ref_content."</td><td>";
                     show_list_of_knowledge(fgets($file));
                     echo "</td></tr>";
