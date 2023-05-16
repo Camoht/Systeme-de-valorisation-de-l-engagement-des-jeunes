@@ -1,0 +1,51 @@
+body{
+	background-color: #f5f5f5;
+	background-image: url('imagejeune.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+}
+.bandeau{
+	background-color: rgb(196, 193, 193);
+	background-image: url(logo.png);
+	background-repeat: no-repeat;
+	align-content: left;
+	background-size: 280px;
+}
+.entete{
+	display: flex;
+	align-items: end;
+	text-align: end;
+	justify-content: end;
+
+}
+.selection{
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: 0,0;
+	text-align: center;
+	background-color:rgb(196, 193, 193) ;
+}
+.cadre{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+.texte{
+	color: #ec008c;
+	font-size: 30pt;
+	text-align: center;
+	margin: auto;
+	background-color: rgb(255, 255, 255);
+	border:2px solid #ec008c;
+}
+#jeune{
+	color: #ec008c;
+	font-size: 100px;
+}
+#valeuramonengagement{
+	color:white;
+	font-size: 40px;
+}
