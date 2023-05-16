@@ -3,6 +3,7 @@
         <title>Demande de référence</title>
         <meta charset="utf-8">
         <script src="checkboxes.js"></script>
+        <script src="link.js"></script>
     </head>
     <body>
         <h1>Créer une demande de référence</h1>
@@ -153,7 +154,9 @@
                 $checkboxValues = rtrim($checkboxValues, ',');
                 // Save values ​​to a file
                 fputs($newReferenceFile, $checkboxValues);
-
+                
+                echo "<a href='student.html' id='link'>Lien vers la page 2</a>";
+                echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
                 fclose($newReferenceFile);
             }
         ?>
