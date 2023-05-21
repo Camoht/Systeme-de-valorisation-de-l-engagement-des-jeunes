@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
         <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
@@ -24,17 +24,17 @@
             2 => "Milieu",
             3 => "Données personnelles du référent",
             4 => "Adresse e-meil du référent",
-            5 => "Savoirs-êtres et savoirs-faire démontrés durant l'engagement"
+            5 => "Savoirs-êtres"
         );
 
         function show_list_of_knowledge($list){
             //Create a table to show the list of knowledge.
             //$list : (char) the line in the reference's file containing the list of knowledge (format : "knowledge1:1,knowledge2:0")
 
-            echo "<table><td><tr>";
+            echo "<table><tr><td>";
             for($i=0;$i<strlen($list);$i++){
                 if($list[$i]==','){ //Separating knowledges
-                    echo "</tr></td><td>";
+                    echo "</td></tr><tr><td>";
 
                 } elseif($list[$i]!=':'){ //Knowledge
                     echo $list[$i];
@@ -48,7 +48,7 @@
                     }
                 }
             }
-            echo "</tr></td></table>";
+            echo "</td></tr></table>";
         }
 
         function show_ref($ref_id){
@@ -58,7 +58,6 @@
             $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
 
             echo '<input type="checkbox" id="'.$ref_id.'">'."<div id='text_".$ref_id."'><table>";
-            echo "<th></th>";
             foreach($_GET["ref_content"] as $ref_content){
                 if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){ //List of knowledge (last line of references' files) has to be displayed with the show_list_of_knowledge function.
                     echo "<tr><td>".$ref_content."</td><td>";
