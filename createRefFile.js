@@ -93,7 +93,9 @@ function table_text(text, table){
                     i++;
                 } else if(text.substr(i, 6)=='/table') { //   /table's tag
                     return table;
-                }
+                } else if(text.substr(i, 7)=='checked') { //   checked checkbox
+                    table[line][col+1]=[':', ' ', 'v', 'a', 'l', 'i', 'd', 'é'];
+                } 
             } 
         } else if(text[i]=="\n") { //    /n's tag
         } else if(text.substr(i, 4)=="    ") { //   tab's tag
@@ -140,7 +142,7 @@ function letter_w(letter){
             return 1.5;
         } else if(letter=='t'){
             return 1.2;
-        } else if(letter=='i' || letter=='l' || letter=='.' || letter==' ' || letter=='r'){
+        } else if(letter=='i' || letter=='l' || letter=='.' || letter==' ' || letter=='r' || letter==':'){
             return 1;
         } else if(letter==letter.toUpperCase()){
             return 3;
@@ -186,6 +188,19 @@ function max_col(table){
     return max;
 }
 
+function pages(pdf, line){
+    // Add pages to pdf file and change the y coordonate in the file if needed.
+    // pdf : (jsPDF) the pdf file. in the file
+    // line : (int) the actual y coordonate in the file.
+    // Return the y coordonate in the file (between 5 and 199) (int).
+
+    if(line>=199){
+        pdf.addPage();
+        return 5;
+    }
+    return line;
+}
+
 function place_table_in_PDF(pdf, table, start_h, start_w){
     // Write in a pdf file a given text.
     // pdf : (jsPDF) the file where to write.
@@ -205,6 +220,7 @@ function place_table_in_PDF(pdf, table, start_h, start_w){
             //There's a table in the table
             if(typeof(table[i][j][0])=="object"){
                 line+=letter_h("");
+                line=pages(pdf, line);
                 line=place_table_in_PDF(pdf, table[i][j], line, col);
 
             //Write the letters
@@ -222,6 +238,7 @@ function place_table_in_PDF(pdf, table, start_h, start_w){
 
         //Change the coordinates
         line+=letter_h("");
+        line=pages(pdf, line);
         col=start_w;
     }
     return line;
