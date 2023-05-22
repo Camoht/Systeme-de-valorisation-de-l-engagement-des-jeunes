@@ -1,6 +1,6 @@
 function nb_zero(i){
     // Use to create a number with 3 figures.
-    // i : (int).
+    // i : (int) between 1 and 999.
     // Return "00", "0" or "" depending on i's number of figures (string).
 
     if(i<10){
@@ -76,7 +76,8 @@ function table_text(text, table){
                     word=0;
                     i+=2;
                 } else if(text.substr(i, 5)=='table' && line!=-1 && col!=-1) { //   table's tag
-                    // Provide the reading of table's tag balise twice
+
+                    //Provide the reading of table's tag balise twice
                     while(text[i]!=">"){
                         i++;
                     }
@@ -85,7 +86,7 @@ function table_text(text, table){
                     table[line][col]=Array();
                     table[line][col]=table_text(text.slice(i), table[line][col]);
 
-                    // Provide the reading of /table's tag twice
+                    //Provide the reading of /table's tag twice
                     while(text.substr(i, 6)!='/table'){
                         i++;
                     }
@@ -193,7 +194,7 @@ function place_table_in_PDF(pdf, table, start_h, start_w){
     // start_w : (int) the x coordonate in the pdf file.
     // Return the final y coordonate  in the pdf file (int).
 
-    // Add the text of chosen references to the PDF file
+    //Add the text of chosen references to the PDF file
     let max_l_col=max_col(table);
     let line=start_h;
     let col=start_w;
