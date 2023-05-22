@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
         <script src="https://unpkg.com/jspdf-autotable@3.5.22/dist/jspdf.plugin.autotable.js"></script>
@@ -23,7 +23,7 @@
             1 => "Durée",
             2 => "Milieu",
             3 => "Données personnelles du référent",
-            4 => "Adresse e-meil du référent",
+            4 => "Adresse e-mail du référent",
             5 => "Savoirs-êtres"
         );
 

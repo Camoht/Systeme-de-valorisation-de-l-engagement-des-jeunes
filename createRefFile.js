@@ -1,7 +1,7 @@
 function nb_zero(i){
-    //Use to create a number with 3 figures.
+    // Use to create a number with 3 figures.
     // i : (int).
-    //Return a string ("00" or "0") depending on i's number of figures.
+    // Return a string ("00" or "0") depending on i's number of figures.
 
     if(i<10){
         return "00";
@@ -109,14 +109,33 @@ function letter_h(letter){
 }
 
 function letter_w(letter){
-    if (letter = letter.toUpperCase) {
-        return 3.2;
-    } else if(letter=='i' || letter=='l'){
-        console.log('i')
-        return 0.5;
-    } else {
-        return 1;
+    if(typeof(letter)=='string'){
+        if(letter=='@'){
+            return 3.8;
+        } else if(letter=='M') {
+            return 4;
+        } else if(letter=='m'){
+            return 3.1;
+        } else if (letter=='S' || letter=='F'){
+            return 2.2;
+        } else if(letter=='f' || letter=='e'){
+            return 1.7;
+        } else if(letter=='-' || letter=='r' || letter=='s'){
+            return 1.5;
+        } else if(letter=='t'){
+            return 1.2;
+        } else if(letter=='i' || letter=='l' || letter=='.' || letter==' '){
+            return 1;
+        } else if(letter=='r'){
+            console.log('r');
+            return 1;
+        } else if(letter==letter.toUpperCase()){
+            return 3;
+        } else {
+            return 2;
+        }
     }
+    return 2;
 }
 
 function max_col(table){ //!L'erreur est dans cette fonctjion ou dans son utilisation!
@@ -155,27 +174,27 @@ function max_col(table){ //!L'erreur est dans cette fonctjion ou dans son utilis
 }
 
 function place_table_in_PDF(pdf, table, start_h, start_w){
-    //Add the text of chosen references to the PDF file
+    // Add the text of chosen references to the PDF file
     let max_l_col=max_col(table);
     let line=start_h;
     let col=start_w;
     let col_w=0;
     for(let i=0; i<table.length; i++){
         for(let j=0; j<table[i].length; j++){
-            for(let k=0; k<table[i][j].length; k++){
-                if(typeof(table[i][j][k])=="object"){
+            if(typeof(table[i][j][0])=="object"){
 
-                    //
-                    line+=letter_h("");
-                    place_table_in_PDF(pdf, table[i][j][k], line, col);
-                } else {
+                //
+                line+=letter_h("");
+                line=place_table_in_PDF(pdf, table[i][j], line, col);
+            } else {
 
-                    //
+                //
+                for(let k=0; k<table[i][j].length; k++){
                     pdf.fromHTML(table[i][j][k], col+col_w, line);
+                    col_w+=letter_w(table[i][j][k]);
                 }
-                col_w+=letter_w(table[i][j][k]);
             }
-            col+=max_l_col[j];
+            col+=max_l_col[j]+2;
             col_w=0;
         }
         line+=letter_h("");
