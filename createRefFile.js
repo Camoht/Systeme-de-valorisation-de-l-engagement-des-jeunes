@@ -1,7 +1,7 @@
 function nb_zero(i){
     // Use to create a number with 3 figures.
     // i : (int).
-    // Return a string ("00" or "0") depending on i's number of figures.
+    // Return "00", "0" or "" depending on i's number of figures (string).
 
     if(i<10){
         return "00";
@@ -39,37 +39,44 @@ function create_HTML(){
 }
 
 function table_text(text, table){
-    // .
+    // Translate html text into an array.
+    // text : (string) html content of a table (witch contains a table in the last cell).
+    // table : (array).
+    // Return the table variable (array).
+
+    //Initialisation variables
     let line=-1;
     let col=-1;
     let word=0;
     table[0]=Array();
     table[0][0]=Array();
+
+    //Read the text variable
     for (let i=0; i<text.length; i++){
-        if(text[i]=="<") { //Some balise
+        if(text[i]=="<") { //Check tags
             while(text[i]!=">"){
                 i++;
-                if(text.substr(i, 5)=='tbody'){ //    tbody
+                if(text.substr(i, 5)=='tbody'){ //  tbody's tag
                     i+=4;
-                } else if(text.substr(i, 6)=='/tbody') { //   /tbody
+                } else if(text.substr(i, 6)=='/tbody') { //   /tbody's tag
                     i+=5;
-                } else if(text.substr(i, 2)=='tr') { //   tr
+                } else if(text.substr(i, 2)=='tr') { //   tr's tag
                     line++;
                     col=-1;
                     word=0;
                     i+=1;
-                } else if(text.substr(i, 3)=='/tr') { //   /tr
+                } else if(text.substr(i, 3)=='/tr') { //   /tr's tag
                     word=0;
                     i+=2;
-                } else if(text.substr(i, 2)=='td') { //    td
+                } else if(text.substr(i, 2)=='td') { //    td's tag
                     word=0;
                     col++;
                     i+=1;
-                } else if(text.substr(i, 3)=='/td') { //   /td
+                } else if(text.substr(i, 3)=='/td') { //   /td's tag
                     word=0;
                     i+=2;
-                } else if(text.substr(i, 5)=='table' && line!=-1 && col!=-1) { //   table
-                    // Provide the reading of table balise twice
+                } else if(text.substr(i, 5)=='table' && line!=-1 && col!=-1) { //   table's tag
+                    // Provide the reading of table's tag balise twice
                     while(text[i]!=">"){
                         i++;
                     }
@@ -78,19 +85,19 @@ function table_text(text, table){
                     table[line][col]=Array();
                     table[line][col]=table_text(text.slice(i), table[line][col]);
 
-                    // Provide the reading of table balise twice
+                    // Provide the reading of /table's tag twice
                     while(text.substr(i, 6)!='/table'){
                         i++;
                     }
                     i++;
-                } else if(text.substr(i, 6)=='/table') { //   /table
+                } else if(text.substr(i, 6)=='/table') { //   /table's tag
                     return table;
                 }
             } 
-        } else if(text[i]=="\n") { //    /n
-        } else if(text.substr(i, 4)=="    ") { //   tab
+        } else if(text[i]=="\n") { //    /n's tag
+        } else if(text.substr(i, 4)=="    ") { //   tab's tag
             i+=3;
-        } else { // text
+        } else { //Fill the table variable whith the text
             if(line!=0 && col==0 && word==0) {
                 table.splice(line, 0, Array(Array(text[i])));
             } else if (col!=0 && word==0){
@@ -105,15 +112,23 @@ function table_text(text, table){
 }
 
 function letter_h(letter){
+    // Get the height of a line.
+    // letter : (char).
+    // Return 4 (int).
+
     return 4;
 }
 
 function letter_w(letter){
+    // Get the width of a letter.
+    // letter : (char).
+    // Return the width of a letter (int).
+
     if(typeof(letter)=='string'){
-        if(letter=='@'){
-            return 3.8;
-        } else if(letter=='M') {
+        if(letter=='M'){
             return 4;
+        } else if(letter=='@') {
+            return 3.8;
         } else if(letter=='m'){
             return 3.1;
         } else if (letter=='S' || letter=='F'){
@@ -124,10 +139,7 @@ function letter_w(letter){
             return 1.5;
         } else if(letter=='t'){
             return 1.2;
-        } else if(letter=='i' || letter=='l' || letter=='.' || letter==' '){
-            return 1;
-        } else if(letter=='r'){
-            console.log('r');
+        } else if(letter=='i' || letter=='l' || letter=='.' || letter==' ' || letter=='r'){
             return 1;
         } else if(letter==letter.toUpperCase()){
             return 3;
@@ -138,10 +150,10 @@ function letter_w(letter){
     return 2;
 }
 
-function max_col(table){ //!L'erreur est dans cette fonctjion ou dans son utilisation!
-    // .
-    // table :(array).
-    // Return.
+function max_col(table){
+    // Get the maximum of word's lenght in each column of table variable.
+    // table :(array) containing array or string.
+    // Return the maximum of word's lenght in each column of table variable (array).
 
     //Fill max variable with 0's
     let max=Array(0);
@@ -163,7 +175,7 @@ function max_col(table){ //!L'erreur est dans cette fonctjion ou dans son utilis
                     width+=letter_w(table[i][j][k]);
                 }
 
-                //
+                //Check if the new word's width is superior at the last one
                 if(width>max[j]){
                     max[j]=width;
                 }
@@ -174,6 +186,13 @@ function max_col(table){ //!L'erreur est dans cette fonctjion ou dans son utilis
 }
 
 function place_table_in_PDF(pdf, table, start_h, start_w){
+    // Write in a pdf file a given text.
+    // pdf : (jsPDF) the file where to write.
+    // table : (array) the text to write.
+    // start_h : (int) the y coordonate in the pdf file.
+    // start_w : (int) the x coordonate in the pdf file.
+    // Return the final y coordonate  in the pdf file (int).
+
     // Add the text of chosen references to the PDF file
     let max_l_col=max_col(table);
     let line=start_h;
@@ -181,22 +200,26 @@ function place_table_in_PDF(pdf, table, start_h, start_w){
     let col_w=0;
     for(let i=0; i<table.length; i++){
         for(let j=0; j<table[i].length; j++){
-            if(typeof(table[i][j][0])=="object"){
 
-                //
+            //There's a table in the table
+            if(typeof(table[i][j][0])=="object"){
                 line+=letter_h("");
                 line=place_table_in_PDF(pdf, table[i][j], line, col);
-            } else {
 
-                //
+            //Write the letters
+            } else {
                 for(let k=0; k<table[i][j].length; k++){
                     pdf.fromHTML(table[i][j][k], col+col_w, line);
                     col_w+=letter_w(table[i][j][k]);
                 }
             }
+
+            //Change the coordinates
             col+=max_l_col[j]+2;
             col_w=0;
         }
+
+        //Change the coordinates
         line+=letter_h("");
         col=start_w;
     }
@@ -204,7 +227,7 @@ function place_table_in_PDF(pdf, table, start_h, start_w){
 }
 
 function create_PDF(){
-    // .
+    // Create a pdf file and fill it with the chosen references.
 
     //Setting the PDF file
     var pdf = new jsPDF({
@@ -217,6 +240,7 @@ function create_PDF(){
     pdf.setFontSize(9);
     pdf.setTextColor(0,0,0);
 
+    //The coordinate in the pdf file of the text
     let start_h=5;
     const start_w=5;
 
