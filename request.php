@@ -1,37 +1,55 @@
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="student.css">
         <title>Demande de référence</title>
         <meta charset="utf-8">
         <script src="checkboxes.js"></script>
         <script src="link.js"></script>
     </head>
     <body>
-        <h1>Créer une demande de référence</h1>
+      <div class="bandeau">
+			  <table class="entete">
+        		  <tr id="jeune">
+					  <td>JEUNE</td>
+				  </tr>
+				  <tr id="valeuramonengagement">
+					  <td>Je donne de la valeur à mon engagement</td>
+				  </tr>
+			  </table>
+        	<form method='POST' action="#">
+		  </div>
+		  <div class="selection">
+			<table class="selection tab">
+			<tr>
+			<td id="selectionjeune">JEUNE</td>
+			<td id="selectionreferent"> RÉFÉRENT </td>
+			<td id="selectionconsultant"> CONSULTANT </td>
+			<td id="selectionpartenaires"> PARTENAIRES </td>
+			</tr>
+			</table>
+		</div>
+        <h3>Créer une demande de référence</h3>
         <form method='POST' action="#">
-            <table>
+            <table class="texte">
                 <tr>
-                    <td>Description de l'engagement</td>
-                    <td><textarea type='text' name='description'></textarea></td>
+                    <td>Description de l'engagement :<textarea id="réponse" type='text' name='description'></textarea></td>
                 </tr>
                 <tr>
-                    <td>Durée de l'engagement</td>
-                    <td><input type='text' name='duration'/></td>
+                    <td>Durée de l'engagement :<input id="réponse" type='text' name='duration'></td>
                 </tr>
                 <tr>
-                    <td>Milieu de l'engagement (association, club, ...)</td>
-                    <td><input type='text' name='environment'/></td>
+                    <td>Milieu de l'engagement (association, club, ...) :<input id="réponse" type='text' name='environment'></td>
                 </tr>
                 <tr>
-                    <td>Données personnelles du référent</td>
-                    <td><textarea type='text' name='referent'></textarea></td>
+                    <td>Données personnelles du référent :<textarea id="réponse" type='text' name='referent'></textarea></td>
                 </tr>
                 <tr>
-                    <td>Email du référent</td>
-                    <td><input type='text' name='email'/></td>
+                    <td>Email du référent :<input id="réponse" type='text' name='email'></td>
                 </tr>
-                <tr>
-                    <td>Liste de vos savoir-faires et/ou savoir-êtres (cochez)</td>
-                    <table>
+            </table>
+              <div class="box">
+                    <h2 id="listesavoirfaire">Liste de vos savoir-faires(cochez)</h2>
+                    <table class="check">
                         <tr>
                           <th>Savoir-être</th>
                           <th>Je suis</th>
@@ -79,6 +97,7 @@
                       </table>
                 </tr>
             </table>
+              </div>
             <button type='submit' name='envoyer'>Envoyer</button>
         </form>
         <?php
@@ -161,4 +180,5 @@
             }
         ?>
     </body>
+</html>
 </html>
