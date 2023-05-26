@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="createaccount.js"></script>
 		<link rel="stylesheet" type="text/css" href="student.css">
         <title>Créer un compte</title>
         <meta charset="utf-8">
@@ -30,23 +32,26 @@
             <table class="texte">
                 <tr>
                     <td>NOM: </td>
-                    <td><input type='text' name='name'/></td>
+                    <td><input type='text' name='name' id="name"/></td>
                 </tr>
                 <tr>
                     <td>PRENOM: </td>
-                    <td><input type='text' name='forename'/></td>
+                    <td><input type='text' name='surname' id="surname"/></td>
                 </tr>
                 <tr>
                     <td>DATE DE NAISSANCE: </td>
-                    <td><input type='text' name='birth'/></td>
+                    <td><input type='text' name='birth' id="birth"/></td>
                 </tr>
                 <tr>
                     <td>EMAIL: </td>
-                    <td><input type='text' name='email'/></td>
+                    <td><input type='text' name='email' id="email"/></td>
                 </tr>
-            		<td><button type='submit' name='submit'>Envoyer</button></td>
-			</table>
+                    <td><button type='submit' name='submit' onclick='request_ajax()'>Envoyer</button></td>
+            </table>
 		</div>
         </form>
+        <div id="phpreponse">
+
+        </div>
     </body>
 </html>
