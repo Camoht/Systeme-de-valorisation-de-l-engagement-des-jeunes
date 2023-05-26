@@ -24,7 +24,7 @@ body{
 }
 .selection{
 	font-family: Arial,sans-serif;
-	margin-left: 1000;
+	margin-left: 970;
 	margin-right: 1000;
 	display: flex;
 	align-items: center;
@@ -38,16 +38,33 @@ body{
 	display:flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+
 }
 .texte{
 	font-family: Arial,sans-serif;
 	color: #ec008c;
 	font-size: 30pt;
-	text-align: center;
+	text-align: end;
 	margin: auto;
 	background-color: rgb(255, 255, 255);
 	border:2px solid #ec008c;
+}
+.check{
+	font-family: Arial,sans-serif;
+	color: black;
+	font-size: 20pt;
+	text-align: end;
+	/*margin-left:1400;*/
+	padding: 2px 30px ;
+	background-color:pink;
+}
+#listesavoirfaire{
+	display: inline;
+	font-family: Arial,sans-serif;
+	color: white;
+	font-size: 15pt;
+	text-align: end;
+	background-color: #ec008c;
 }
 #jeune{
 	text-align:end;
@@ -118,4 +135,27 @@ body{
 #selectionpartenaires:active{
 	transition: 1ms;
 	background-color: black;
+}
+h1{
+	margin-left: 800;
+	margin-right: 850;
+	color: white;
+	background-color: #ec008c;
+	font-size: 50px;
+	font-family: Arial,sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+h3{
+	margin-left: 550;
+	margin-right: 560;
+	color: white;
+	background-image:linear-gradient(45deg,#ec008c,#f37ad9ee);
+	font-size: 50px;
+	font-family: Arial,sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+.box{
+	margin-left: 1580;
 }
