@@ -174,7 +174,7 @@
                 // Save values ​​to a file
                 fputs($newReferenceFile, $checkboxValues);
                 
-                echo "<a href='student.html' id='link'>Lien vers la page 2</a>";
+                echo "<a href='referent.php?studentId=" . $studentId . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la page 2</a>";
                 echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
                 fclose($newReferenceFile);
             }
