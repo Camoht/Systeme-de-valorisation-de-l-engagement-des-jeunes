@@ -1,0 +1,7 @@
+0
+Distribution de nourriture
+Une semaine
+Association Faim
+Emilien
+oiutehd@gmail.com
+autonome:0,polie:0,vendeur:0,cuisinier:0
