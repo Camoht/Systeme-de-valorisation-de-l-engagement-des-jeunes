@@ -13,7 +13,7 @@ function nb_zero(i){
 }
 
 function create_HTML(){
-    //Create a new window with the chosen references.
+    // Create a new window with the chosen references.
 
     let MyW=window.open("");
     let html="<head><title>Mes références</title>";
@@ -277,7 +277,7 @@ function create_PDF(){
             //Create array containing the text
             let table=Array();
             table=table_text(text, table);
-        
+            
             //Add the text of chosen references to the PDF file
             start_h=place_table_in_PDF(pdf, table, start_h, start_w);
             start_h+=2*letter_h("");
@@ -291,7 +291,7 @@ function create_PDF(){
 }
 
 function create_file(){
-    //Create PDF file or an HTML one with the chosen references.
+    // Create PDF file or an HTML one with the chosen references.
 
     //Choose the selected format
     if(document.getElementById("HTML").checked==true){
