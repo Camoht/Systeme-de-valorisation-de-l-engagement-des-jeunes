@@ -4,43 +4,30 @@ document.addEventListener("DOMContentLoaded", function() {
         // Prevent the unwanted transmission
         event.preventDefault();
 
-        //Initialise the variables
-        let name='';
-        let surname='';
-        let birth='';
-        let email='';
+        //Get written information by the user
+        let name=document.getElementById('name').value;
+        let surname=document.getElementById('surname').value;
+        let birth=document.getElementById('birth').value;
+        let email=document.getElementById('email').value;
+        let password=document.getElementById('password').value;
 
         //Initialise the ajax request
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "createaccount.php?", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         //Trigger the following instructions when the user clicks on the button
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-
-                console.log("Je rempli les valeurs");
-
-                //Get written information by the user
-                name=document.getElementById('name').value;
-                surname=document.getElementById('surname').value;
-                birth=document.getElementById('birth').value;
-                email=document.getElementById('email').value;
+            if (this.readyState ==4 && this.status == 200) {
 
                 //Display php response
                 document.getElementById("phpreponse").innerHTML = xhr.responseText;
-
-                xhr.send("name="+encodeURIComponent(name)/*+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)*/);
             }
         };
 
-        console.log (name)
-        console.log (surname)
-        console.log (birth)
-        console.log (email)
 
         //Send variables to php
-        //xhr.send("name="+encodeURIComponent(name)/*+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)*/);
+        xhr.open("post", "createaccount.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("name="+encodeURIComponent(name)+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
 
         console.log("Fin du js");
     });
