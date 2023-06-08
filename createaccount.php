@@ -1,27 +1,9 @@
 <?php
-/*    if (isset($_POST)){
-
-        $name2=$_POST["name"]."panda";
-        echo "name2 : ".$name2."<br/>";
-
-        echo "name : ".$_POST["name"]."<br/>";
-        echo "surname : ".$_POST["surname"]."<br/>";
-        echo "birth : ".$_POST["birth"]."<br/>";
-        echo "email : ".$_POST["email"]."<br/>";
-        echo "couou";
-    }
-    if ($request == 2){
-        echo "booto";
-    }*/
-
-    $_POST["name"]="char";
-    $_POST["surname"]="";
-    $_POST["birth"]="azertyuiop";
-
-    $_POST["email"]="azertyu@gmail.com";
-
-
+    
     function empty_field(){
+        //Function verifying if the fields are empty or not.
+        //return 0 is all the fields are filled and 1 if they are not
+
         if ($_POST["name"]==""){
             return 1;
         }
@@ -34,20 +16,26 @@
         else if ($_POST["email"]==""){
             return 1;
         }
+        else if ($_POST["password"]==""){
+            return 1;
+        }
         else {
             return 0;
         }
     }
 
+    
     function format_date(){
-        echo strlen($_POST["birth"]);
+        //Function verifying if the birth date given by the user is on the dd/mm/yyyy format
+        //Return 0 if the date format is correct and 1 if it is not
+
         if(strlen($_POST["birth"])!=10){
             return 1;
         }
         else{
             list($day, $month, $year) = explode('/', $_POST["birth"]);
 
-            if (checkdate($month, $day, $year)==0){
+            if (checkdate($month, $day, $year)==""){
                 return 1;
             }
             else{
@@ -56,17 +44,24 @@
         }
     }
 
-
+    
     function reused_mail (){
+        //Function verifiyng if the email adress given by the user is already used on another account
+        //Return 0 if the adress email isn't used by someone else and 1 if it is
+
         $folder_names=scandir('Data/');
         $folder_names=array_diff($folder_names,[".",".."]);
         
-
+        //Explore data files
         foreach ($folder_names as $user_id){
             $file=fopen("Data/".$user_id."/user.txt", 'r');
+
+            //Skip the useless informations in data files
             for($i=0; $i<3; $i++){
                 fgets($file);
             }
+
+            //Get the already used email adresses to compare with the one the user wrote
             $mail=fgets($file);
             if($mail==$_POST["email"]){
                 return 1;
@@ -76,13 +71,34 @@
     }
 
 
+    function format_mail (){
+        //Function verifiyng if the email adress given by the user is usable
+        //Return 0 if the email adress is usable and 1 if unusable
+
+        if(stristr($_POST["email"], '@')=="") {
+            return 1;
+        }
+        if(stristr($_POST["email"], '.')=="") {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    } 
 
 
-    if (reused_mail()==0){
-        echo"bananana";
+    //Display error notes if the linked functions return 1
+    if (empty_field()==1){
+        echo"Le remplissage de tous les champs est obligatoire. <br/>";
     }
-    else{
-        echo"nooOOOoooOOOO";
+    if (format_date()==1){
+        echo"Vous devez écrire votre date de naissance au format suivant : dd/mm/aaaa <br/>";
+    }
+    if (reused_mail()==1){
+        echo"L'adresse email est déjà utilisée par un autre compte. <br/>";
+    }
+    if (format_mail()==1){
+        echo"L'adresse email fournie est erronée. <br/>";
     }
 
 
