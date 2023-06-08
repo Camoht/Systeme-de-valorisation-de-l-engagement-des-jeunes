@@ -2,8 +2,14 @@
 
 <html>
     <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-        <script type="text/javascript" src="createRefFile.js"></script>
+        <?php
+        include 'constants.php';
+
+        //Include some files
+        echo '<script type="text/javascript" src='.$_SESSION["Files"]["Print_references"]["js"].'></script>';
+        echo '<script src='.$_SESSION["Files"]["Print_references"]["js_link"].'></script>'
+        ?>
+
         <title>Mes références</title>
         <meta charset="utf-8">
     </head>
@@ -13,24 +19,7 @@
         <div id="alert"><!--Space to notice if a page or a file has been created or not--></div>
 
         <?php
-
-        //!Constantes sensées être obtenue plus tôt... J'ai supposées qu'elles seraient sous ce format...!
-        $_GET["folder"]="Data";
-        $_GET["user_id"]="001";
-        $_GET["user_content"]=array (
-            0 => "Nom",
-            1 => "Prénom",
-            2 => "Date de naissance",
-            3 => "E-mail"
-        );
-        $_GET["ref_content"]=array (
-            0 => "Description",
-            1 => "Durée",
-            2 => "Milieu",
-            3 => "Données personnelles du référent",
-            4 => "Adresse e-mail du référent",
-            5 => "Savoirs-êtres acquis"
-        );
+        include 'constants.php';
         
         function nb_zero($i){
             // Use to create a number with 3 figures.
@@ -79,27 +68,26 @@
             // $i : (int) the id of reference's file (between 1 and 999).
             // Return TRUE if the reference's file has been correctly displayed, FALSE if not.
 
+            //Variables
+            $Table_ref_content=array (
+                0 => "Description",
+                1 => "Durée",
+                2 => "Milieu",
+                3 => "Données personnelles du référent",
+                4 => "Adresse e-mail du référent",
+                5 => "Savoirs-êtres acquis"
+            );
+
             //Open the reference's file
             $ref_id="ref".nb_zero($i).$i.".txt";
-            $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
+            $file=fopen($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'.$ref_id, 'r');
 
             //Check if the reference has been validated by the referent
             $first_lig=fgets($file);
-            /*echo $first_lig."<br/>";
-            //$first_lig=preg_replace('/[\xOO-\x1F\x8O-\xFF]/', ",$first_lig");
-            //echo gettype($first_lig)."<br/>";
-            if(strpos($first_lig, "\n")!=false){
-                echo "ui"."<br/>";
-            } else {
-                echo "nion"."<br/>";
-            }
             if($first_lig=="0\n" || $first_lig=="0"){
-                echo "no !"."<br/>";
-                echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'" hidden>'; //To avoid problems with the js code
+                echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'" hidden>'; //to avoid problems with the js code
                 return FALSE;
-            } else {
-                echo "si !"."<br/>";
-            }*/
+            }
 
             $status_div="";
             $status_check="";
@@ -113,10 +101,10 @@
 
             echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'" '.$status_check.'>';
             echo "<div id='text_".$ref_id."' ".$status_div.">"."<table>";
-            foreach($_GET["ref_content"] as $ref_content){
+            foreach($Table_ref_content as $ref_content){
                 
                 //List of knowledge (last line of references' files) has to be displayed with the show_list_of_knowledge function
-                if(array_search($ref_content, $_GET["ref_content"])==count($_GET["ref_content"])-1){
+                if(array_search($ref_content, $Table_ref_content)==count($Table_ref_content)-1){
                     echo "<tr><td>".$ref_content."</td><td>";
                     show_list_of_knowledge(fgets($file));
                     echo "</td></tr>";
@@ -128,9 +116,9 @@
             }
 
             //Add the referent's comment if there are
-            if(file_exists($_GET["folder"].'/'.$_GET["user_id"].'/'."comRef".nb_zero($i).$i.".txt")){
+            if(file_exists($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'."comRef".nb_zero($i).$i.".txt")){
                 fclose($file);
-                $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'."comRef".nb_zero($i).$i.".txt", 'r');
+                $file=fopen($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'."comRef".nb_zero($i).$i.".txt", 'r');
 
                 echo "<tr><td>Commentaires</td><td>";
                 while (!feof($file)){
@@ -150,12 +138,20 @@
         function show_student(){
             // Show the content of user's file.
 
+            //Variables
+            $Table_user_content=array (
+                0 => "Nom",
+                1 => "Prénom",
+                2 => "Date de naissance",
+                3 => "E-mail"
+            );
+
             //Open the user's file
-            $file=fopen($_GET["folder"]."/".$_GET["user_id"]."/user.txt", 'r');
+            $file=fopen($_SESSION["Files"]["Data"]."/".$_SESSION["User_id"]."/user.txt", 'r');
 
             //Write the content of user's file
             echo "<table>";
-            foreach($_GET["user_content"] as $user_content){
+            foreach($Table_user_content as $user_content){
                 echo "<tr><td>".$user_content."</td><td>".fgets($file)."</td></tr>";
             }
             echo "</table>";
@@ -167,7 +163,7 @@
             // Create a list of references that the student can choose.
 
             //Get the names of references' files (Get the name of user's files and delete thoses who are not references' files like "." and "..")
-            $file_names=scandir($_GET["folder"].'/'.$_GET["user_id"].'/');
+            $file_names=scandir($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/');
             foreach($file_names as $file){
                 if(substr($file, 0, 3)!="ref"){
                     $file_names=array_diff($file_names,array($file));
