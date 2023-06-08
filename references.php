@@ -16,7 +16,7 @@
 
         //!Constantes sensées être obtenue plus tôt... J'ai supposées qu'elles seraient sous ce format...!
         $_GET["folder"]="Data";
-        $_GET["user_id"]="003";
+        $_GET["user_id"]="001";
         $_GET["user_content"]=array (
             0 => "Nom",
             1 => "Prénom",
@@ -34,7 +34,7 @@
         
         function nb_zero($i){
             // Use to create a number with 3 figures.
-            // i : (int) between 1 and 999.
+            // $i : (int) between 1 and 999.
             // Return "00", "0" or "" depending on i's number of figures (string).
         
             if($i<10){
@@ -75,16 +75,35 @@
         }
 
         function show_ref($i){
-            //Show the content of reference's file.
-            //$i : (int) the id of reference's file (between 1 and 999).
+            // Show the content of reference's file if it has been validated by the referent.
+            // $i : (int) the id of reference's file (between 1 and 999).
+            // Return TRUE if the reference's file has been correctly displayed, FALSE if not.
 
             //Open the reference's file
             $ref_id="ref".nb_zero($i).$i.".txt";
             $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'.$ref_id, 'r');
 
+            //Check if the reference has been validated by the referent
+            $first_lig=fgets($file);
+            /*echo $first_lig."<br/>";
+            //$first_lig=preg_replace('/[\xOO-\x1F\x8O-\xFF]/', ",$first_lig");
+            //echo gettype($first_lig)."<br/>";
+            if(strpos($first_lig, "\n")!=false){
+                echo "ui"."<br/>";
+            } else {
+                echo "nion"."<br/>";
+            }
+            if($first_lig=="0\n" || $first_lig=="0"){
+                echo "no !"."<br/>";
+                echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'" hidden>'; //To avoid problems with the js code
+                return FALSE;
+            } else {
+                echo "si !"."<br/>";
+            }*/
+
             $status_div="";
             $status_check="";
-            //Hide somme tag for the consultant
+            //Hide somme tag for the consultant (when a link is created)
             if(isset($_GET['button_link'])){
                 $status_check="hidden";
                 if(!isset($_GET[$i])){
@@ -107,14 +126,29 @@
                     echo "<tr><td>".$ref_content."</td><td>".fgets($file)."</td></tr>";
                 }
             }
+
+            //Add the referent's comment if there are
+            if(file_exists($_GET["folder"].'/'.$_GET["user_id"].'/'."comRef".nb_zero($i).$i.".txt")){
+                fclose($file);
+                $file=fopen($_GET["folder"].'/'.$_GET["user_id"].'/'."comRef".nb_zero($i).$i.".txt", 'r');
+
+                echo "<tr><td>Commentaires</td><td>";
+                while (!feof($file)){
+                    echo fgets($file)."<br/>";
+                }
+                echo "</td><tr/>";
+            }
+
             echo "</table></div>";
             echo "</br>";
 
             fclose($file);
+
+            return TRUE;
         }
 
         function show_student(){
-            //Show the content of user's file.
+            // Show the content of user's file.
 
             //Open the user's file
             $file=fopen($_GET["folder"]."/".$_GET["user_id"]."/user.txt", 'r');
@@ -130,11 +164,15 @@
         }
 
         function show_all_ref(){
-            //Create a list of references that the student can choose.
+            // Create a list of references that the student can choose.
 
-            //Get the names of references' file
+            //Get the names of references' files (Get the name of user's files and delete thoses who are not references' files like "." and "..")
             $file_names=scandir($_GET["folder"].'/'.$_GET["user_id"].'/');
-            $file_names=array_diff($file_names,[".","..","user.txt"]);
+            foreach($file_names as $file){
+                if(substr($file, 0, 3)!="ref"){
+                    $file_names=array_diff($file_names,array($file));
+                }
+            }
 
             //Show the content of references' files (if they are)
             if(count($file_names)==0){
@@ -145,7 +183,7 @@
                 $status_choice="";
                 $status_description="hidden";
 
-                //Hide somme tag for the consultant
+                //Hide or display somme tag for the consultant (when a link is created)
                 if(isset($_GET['button_link'])){
                     $status_choice="hidden";
                     $status_description="";
