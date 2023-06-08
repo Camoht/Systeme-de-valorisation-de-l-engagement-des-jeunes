@@ -1,0 +1,7 @@
+1
+Recruteur de donneurs
+Une semaine
+Association la Croix Rouge
+Nathan Fouchet
+ireziug@gmail.com
+autonome:0,polie:1,vendeur:1
