@@ -63,9 +63,10 @@
 
             //Get the already used email adresses to compare with the one the user wrote
             $mail=fgets($file);
-            if($mail==$_POST["email"]){
+            if($mail==$_POST["email"]."\n"){
                 return 1;
             }
+
         }
         return 0;
     }
@@ -86,21 +87,46 @@
         }
     } 
 
+    function nb_zero($i){
+        // Use to create a number with 3 figures.
+        // i : (int) between 1 and 999.
+        // Return "00", "0" or "" depending on i's number of figures (string).
+    
+        if($i<10){
+            return "00";
+        } else if($i<100){
+            return "0";
+        } else {
+            return "";
+        }
+    }
 
     //Display error notes if the linked functions return 1
     if (empty_field()==1){
         echo"Le remplissage de tous les champs est obligatoire. <br/>";
     }
-    if (format_date()==1){
+    else if (format_date()==1){
         echo"Vous devez écrire votre date de naissance au format suivant : dd/mm/aaaa <br/>";
     }
-    if (reused_mail()==1){
+    else if (reused_mail()==1){
         echo"L'adresse email est déjà utilisée par un autre compte. <br/>";
     }
-    if (format_mail()==1){
+    else if(format_mail()==1){
         echo"L'adresse email fournie est erronée. <br/>";
     }
 
+
+
+    else{
+        $folder_names=scandir('Data/');
+        $folder_names=array_diff($folder_names,[".",".."]);
+        $users_number=count($folder_names)+1;
+        mkdir("Data/".nb_zero($users_number).$users_number, 0777);
+
+        $file = fopen("Data/".nb_zero($users_number).$users_number."/user.txt", 'w');
+        fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
+
+    }
 
 
 ?>
