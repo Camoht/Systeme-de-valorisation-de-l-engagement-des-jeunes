@@ -4,19 +4,18 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>    Bienvenue sur le site Jeune6.4 !<br>
-    Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
-    Un jeune vous a identifié comme son référent.<br>
-    Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br></h2>
+        <h2>Bienvenue sur le site Jeune6.4 !</h2>
+        Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
+        Un jeune vous a identifié comme son référent.<br>
+        Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br>
         <?php
-            echo "Données de l'élève : \n";
-
-            $studentId = $_GET['studentId'];
+            include 'constants.php';
             $refnb = $_GET['refnb'];
-            $refPath = 'Data/' . $studentId . '/ref' . $refnb .'.txt';
-            $commentPath = 'Data/' . $studentId . '/comRef' . $refnb .'.txt';
-            $userPath = 'Data/' . $studentId . '/user.txt';
+            $refPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/ref' . $refnb .'.txt';
+            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/comRef' . $refnb .'.txt';
+            $userPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][0];
 
+            echo "Données de l'élève :<br/>";
 
             $ligneCount = 0;
             if(file_exists($userPath)){
@@ -90,7 +89,7 @@
 
                         fclose($refFile);
 
-                        header('Location: HTML REFERENT remerciement.html');
+                        header('Location: '.$_SESSION["Files"]["Referent_welcome"]["html"]);
                         exit();
                     }
                 }
@@ -112,7 +111,7 @@
                         switch ($ligneCount) {
                             case 1:
                                 if ($line == "1"){  //The reference has already been validated
-                                    header('Location: HTML REFERENT remerciement.html');
+                                    header('Location: '.$_SESSION["Files"]["Referent_welcome"]["html"]);
                                     exit();
                                 } 
                             case 2:

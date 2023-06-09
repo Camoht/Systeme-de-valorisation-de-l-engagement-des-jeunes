@@ -1,33 +1,19 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="student.css">
+      <?php
+      //Include some files
+      include 'constants.php';
+      echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Student"].'>';
+      echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][0].'></script>';
+      echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][1].'></script>';
+      ?>
         <title>Demande de référence</title>
         <meta charset="utf-8">
-        <script src="checkboxes.js"></script>
-        <script src="link.js"></script>
     </head>
     <body>
-      <div class="bandeau">
-			  <table class="entete">
-        		  <tr id="jeune">
-					  <td>JEUNE</td>
-				  </tr>
-				  <tr id="valeuramonengagement">
-					  <td>Je donne de la valeur à mon engagement</td>
-				  </tr>
-			  </table>
-        	<form method='POST' action="#">
-		  </div>
-		  <div class="selection">
-			<table class="selection tab">
-			<tr>
-			<td id="selectionjeune">JEUNE</td>
-			<td id="selectionreferent"> RÉFÉRENT </td>
-			<td id="selectionconsultant"> CONSULTANT </td>
-			<td id="selectionpartenaires"> PARTENAIRES </td>
-			</tr>
-			</table>
-		</div>
+      <?php
+      echo $_SESSION["BANDEAU"];
+      ?>
         <h3>Créer une demande de référence</h3>
         <form method='POST' action="#">
             <table class="texte">
@@ -101,17 +87,16 @@
             <button type='submit' name='envoyer'>Envoyer</button>
         </form>
         <?php
-            $studentId = '045'; //(à déterminer en fonction de l'utilisateur connecté)
             if(isset($_POST['envoyer'])){
                 //Verification of the number of references for this user
-                $refNumberPath = 'Data/' . $studentId;
+                $refNumberPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"];
                 if(!is_dir($refNumberPath)){
                     mkdir($refNumberPath, 0777, true);
                 }
-                if(!file_exists($refNumberPath . '/refNumber.txt')){
-                    touch($refNumberPath . '/refNumber.txt');
+                if(!file_exists($refNumberPath . "/".$_SESSION["Files"]["inData"][1])){
+                    touch($refNumberPath . "/".$_SESSION["Files"]["inData"][1]);
                 }
-                $refNumberPath = 'Data/' . $studentId . '/refNumber.txt';
+                $refNumberPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][1];
                 $refNumberFile = fopen($refNumberPath, 'r+');
                 if(filesize($refNumberPath) === 0){
                     fputs($refNumberFile, '001');
@@ -128,8 +113,8 @@
                 fclose($refNumberFile);
 
                 $newReference = 'ref' . $refNumberForm . '.txt';
-                touch('Data/' . $studentId . '/' . $newReference);
-                $newReferencePath = 'Data/' . $studentId . '/' . $newReference;
+                touch($_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference);
+                $newReferencePath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference;
                 $newReferenceFile = fopen($newReferencePath, 'w+');
                 fputs($newReferenceFile, "0\n"); //The request has not yet been validated
                 fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['description'])."\n");
@@ -166,7 +151,7 @@
                 // Save values ​​to a file
                 fputs($newReferenceFile, $checkboxValues);
                 
-                echo "<a href='referent.php?studentId=" . $studentId . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
+                echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
                 echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
                 fclose($newReferenceFile);
             }
