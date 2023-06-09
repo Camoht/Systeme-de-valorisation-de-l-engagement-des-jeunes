@@ -77,6 +77,7 @@
     $_SESSION["Files"]["Data"]="Data";
     $_SESSION["Files"]["inData"][0]="user.txt";
     $_SESSION["Files"]["inData"][1]="refNumber.txt";
+    $_SESSION["Files"]["inData"][2]="comRef";
         //Émilien
     $_SESSION["Files"]["Referent_welcome"]["html"]="HTML REFERENT remerciement.html";
     $_SESSION["Files"]["css"]["Student"]="student.css";

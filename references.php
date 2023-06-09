@@ -3,9 +3,9 @@
 <html>
     <head>
         <?php
-        include 'constants.php';
-
         //Include some files
+        include 'constants.php';
+        echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Student"].'>';
         echo '<script type="text/javascript" src='.$_SESSION["Files"]["Print_references"]["js"].'></script>';
         echo '<script src='.$_SESSION["Files"]["Print_references"]["js_link"].'></script>'
         ?>
@@ -15,11 +15,12 @@
     </head>
     
     <body>
-        <h1>Mes références</h1>
         <div id="alert"><!--Space to notice if a page or a file has been created or not--></div>
 
         <?php
-        include 'constants.php';
+
+        echo $_SESSION["BANDEAU"];
+        echo '<h3>Mes références</h3>';
         
         function nb_zero($i){
             // Use to create a number with 3 figures.
@@ -106,19 +107,20 @@
                 //List of knowledge (last line of references' files) has to be displayed with the show_list_of_knowledge function
                 if(array_search($ref_content, $Table_ref_content)==count($Table_ref_content)-1){
                     echo "<tr><td>".$ref_content."</td><td>";
+                    
                     show_list_of_knowledge(fgets($file));
                     echo "</td></tr>";
 
                 //The content of reference's file
                 } else {
-                    echo "<tr><td>".$ref_content."</td><td>".fgets($file)."</td></tr>";
+                    echo "<tr><td>".$ref_content."</td><td>".str_replace("&é(-è_çà", "<br/>", fgets($file))."</td></tr>";
                 }
             }
 
             //Add the referent's comment if there are
-            if(file_exists($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'."comRef".nb_zero($i).$i.".txt")){
+            if(file_exists($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'.$_SESSION["Files"]["inData"][2].nb_zero($i).$i.".txt")){
                 fclose($file);
-                $file=fopen($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'."comRef".nb_zero($i).$i.".txt", 'r');
+                $file=fopen($_SESSION["Files"]["Data"].'/'.$_SESSION["User_id"].'/'.$_SESSION["Files"]["inData"][2].nb_zero($i).$i.".txt", 'r');
 
                 echo "<tr><td>Commentaires</td><td>";
                 while (!feof($file)){
@@ -147,7 +149,7 @@
             );
 
             //Open the user's file
-            $file=fopen($_SESSION["Files"]["Data"]."/".$_SESSION["User_id"]."/user.txt", 'r');
+            $file=fopen($_SESSION["Files"]["Data"]."/".$_SESSION["User_id"]."/".$_SESSION["Files"]["inData"][0], 'r');
 
             //Write the content of user's file
             echo "<table>";
@@ -186,11 +188,17 @@
                 }
 
                 //Show a description of the project to the consultant
-                echo "<div ".$status_description."><h3>Descritpion du projet</h3></div>";
+                echo
+                "<div ".$status_description.">
+                    <h3>Descritpion du site</h3>
+                    Bienvenue sur le site internet Jeune6.4 ! <br/>
+                    Ce site permet aux étudiants de mettre en avant leurs expèriences professionnels (stages, bénévolats, etc...). <br/>
+                    Un étudiant souhaite vous faire part de ses expériences. <br/>
+                </div>";
 
                 //Show the user's data to the consultant
                 echo "<div ".$status_description.">";
-                echo "<h3>Description du l'étudiant</h3>";
+                echo "<h3>Description de l'étudiant</h3>";
                 show_student();
                 echo "</div>";
 
@@ -210,7 +218,7 @@
                 echo "</div>";
 
                 //Give the user the ability to check his references
-                echo '<div id="intro" '.$status_choice.'>Voici les références que vous pouvez choisir :</div>';
+                echo '<div id="intro" '.$status_choice.'>Voici vos références validées par vos référents :</div>';
                 for($i=1; $i<=count($file_names); $i++){
                     show_ref($i);
                 }
