@@ -6,11 +6,47 @@
     <body>
         <h2>Un élève souhaite que vous validiez cette expérience : </h2>
         <?php
+            echo "Données de l'élève : \n";
+
             $studentId = $_GET['studentId'];
             $refnb = $_GET['refnb'];
             $refPath = 'Data/' . $studentId . '/ref' . $refnb .'.txt';
             $commentPath = 'Data/' . $studentId . '/comRef' . $refnb .'.txt';
+            $userPath = 'Data/' . $studentId . '/user.txt';
 
+
+            $ligneCount = 0;
+            if(file_exists($userPath)){
+                $userFile = fopen($userPath, 'r+');
+
+                while (($line = fgets($userFile)) !== false) {
+                    $ligneCount++;
+
+                    // Supprimer les espaces en début et en fin de ligne
+                    $line = trim($line);
+                    
+                    // Vérifier si la ligne est vide
+                    if (!empty($line)) {
+                        switch ($ligneCount) {
+                            case 1:
+                                echo("Nom : " . $line . "<br>");
+                                break;
+                            case 2:
+                                echo("Prénom : " . $line . "<br>");
+                                break;
+                            case 3:
+                                echo("Date de naissance : " . str_replace("_", "/", $line . "<br>"));
+                                break;
+                            case 4:
+                                echo("Email : " . $line . "<br>");
+                                break;
+                            default:
+                                // Gérer le cas où une ligne supplémentaire est rencontrée ou ignorer si nécessaire
+                                break;
+                        }
+                    }
+                }
+            }
 
             $ligneCount = 0;
 
@@ -59,7 +95,7 @@
 
             if(file_exists($refPath)){
                 $refFile = fopen($refPath, 'r+');
-
+                echo "Expérience : ";
                 echo("<form method='POST'>");
 
                 while (($line = fgets($refFile)) !== false) {
