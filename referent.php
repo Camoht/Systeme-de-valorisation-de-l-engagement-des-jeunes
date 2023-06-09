@@ -4,7 +4,10 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Un élève souhaite que vous validiez cette expérience : </h2>
+        <h2>    Bienvenue sur le site Jeune6.4 !<br>
+    Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
+    Un jeune vous a identifié comme son référent.<br>
+    Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br></h2>
         <?php
             echo "Données de l'élève : \n";
 
