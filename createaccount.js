@@ -23,12 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
 
-
+        console.log(document.getElementById("Create_account_php_1").value);
         //Send variables to php
-        xhr.open("post", "createaccount.php", true);
+        xhr.open("post", document.getElementById("Create_account_php_1").value, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("name="+encodeURIComponent(name)+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
-
-        console.log("Fin du js");
     });
 });

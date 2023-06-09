@@ -12,7 +12,7 @@
             include 'constants.php';
             $refnb = $_GET['refnb'];
             $refPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/ref' . $refnb .'.txt';
-            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/comRef' . $refnb .'.txt';
+            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/'.$_SESSION["Files"]["inData"][2].' . $refnb .'.txt';
             $userPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][0];
 
             echo "Données de l'élève :<br/>";

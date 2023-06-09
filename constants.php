@@ -87,8 +87,10 @@
     $_SESSION["Files"]["Ask_reference"]["js"][0]="link.js";
     $_SESSION["Files"]["Ask_reference"]["js"][1]="checkboxes.js";
         //Xavier
-    $_SESSION["Files"]["Visitor_welcome"]["html"]="";
-    $_SESSION["Files"]["Create_account"]["php"]="createaccount.php";
+    $_SESSION["Files"]["Visitor_welcome"]["php"][0]="visitor_objectives.php";
+    $_SESSION["Files"]["Visitor_welcome"]["php"][1]="visitor_partners.php";
+    $_SESSION["Files"]["Create_account"]["php"][0]="createaccount.php";
+    $_SESSION["Files"]["Create_account"]["php"][1]="createaccount2.php";
     $_SESSION["Files"]["Create_account"]["js"]="createaccount.js";
         //Camille
     $_SESSION["Files"]["Cansultant_welcome"]["html"]="";
