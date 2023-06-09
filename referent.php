@@ -116,7 +116,7 @@
                                     exit();
                                 } 
                             case 2:
-                                echo("Description de l'engagement : " . $line . "<br>");
+                                echo("Description de l'engagement : " . str_replace('&é(-è_çà', "<br>", $line) . "<br>");
                                 break;
                             case 3:
                                 echo("Durée de l'engagement : " . $line . "<br>");
@@ -125,7 +125,7 @@
                                 echo("Lieu : " . $line . "<br>");
                                 break;
                             case 5:
-                                echo("Nom du référent : " . $line . "<br>");
+                                echo("Données du référent : " . str_replace('&é(-è_çà', "<br>", $line) . "<br>");
                                 break;
                             case 7:
                                 // Diviser la dernière ligne en mots et numéros en utilisant une virgule comme séparateur

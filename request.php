@@ -132,10 +132,10 @@
                 $newReferencePath = 'Data/' . $studentId . '/' . $newReference;
                 $newReferenceFile = fopen($newReferencePath, 'w+');
                 fputs($newReferenceFile, "0\n"); //The request has not yet been validated
-                fputs($newReferenceFile, str_replace("\n", ". ", $_POST['description'])."\n");
+                fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['description'])."\n");
                 fputs($newReferenceFile, $_POST['duration']."\n");
                 fputs($newReferenceFile, $_POST['environment']."\n");
-                fputs($newReferenceFile, str_replace("\n", ". ", $_POST['referent'])."\n");
+                fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['referent'])."\n");
                 fputs($newReferenceFile, $_POST['email']."\n");
 
                 // Array with names of categories
