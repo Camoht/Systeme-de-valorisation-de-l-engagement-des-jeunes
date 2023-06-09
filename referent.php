@@ -9,17 +9,30 @@
             $studentId = $_GET['studentId'];
             $refnb = $_GET['refnb'];
             $refPath = 'Data/' . $studentId . '/ref' . $refnb .'.txt';
+            $commentPath = 'Data/' . $studentId . '/comRef' . $refnb .'.txt';
+
 
             $ligneCount = 0;
 
             if(isset($_POST['envoyer'])){
+                
+                touch($commentPath);
+                if (is_writable($commentPath)) {
+                    $commentFile = fopen($commentPath, 'r+');
+                    fputs($commentFile, $_POST['comment']);
+                    fclose($commentFile);
+                }
+
                 if (is_writable($refPath)) {
   
                     $refFile = fopen($refPath, 'r+');
             
                     if ($refFile) {
+                        
+                        rewind($refFile);   //Modification of first line because the reference has been validated
+                        fputs($refFile, "1");
+
                         $fileContent = file($refPath);
-                
                         $lastLine = end($fileContent);
                         $wordsNumbers = explode(',', $lastLine);
 
@@ -59,18 +72,23 @@
                     if (!empty($line)) {
                         switch ($ligneCount) {
                             case 1:
+                                if ($line == "1"){  //The reference has already been validated
+                                    header('Location: HTML REFERENT remerciement.html');
+                                    exit();
+                                } 
+                            case 2:
                                 echo("Description de l'engagement : " . $line . "<br>");
                                 break;
-                            case 2:
+                            case 3:
                                 echo("Durée de l'engagement : " . $line . "<br>");
                                 break;
-                            case 3:
+                            case 4:
                                 echo("Lieu : " . $line . "<br>");
                                 break;
-                            case 4:
+                            case 5:
                                 echo("Nom du référent : " . $line . "<br>");
                                 break;
-                            case 6:
+                            case 7:
                                 // Diviser la dernière ligne en mots et numéros en utilisant une virgule comme séparateur
                                 $motsNumeros = explode(',', $line);
 
@@ -91,6 +109,7 @@
                         }
                     }
                 }
+                echo "Commentaires éventuels :<textarea type='text' name='comment'></textarea>";
                 fclose($refFile);
                 echo "<button type='submit' name='envoyer'>Envoyer</button>";
                 echo("</form>");

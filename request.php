@@ -131,10 +131,11 @@
                 touch('Data/' . $studentId . '/' . $newReference);
                 $newReferencePath = 'Data/' . $studentId . '/' . $newReference;
                 $newReferenceFile = fopen($newReferencePath, 'w+');
-                fputs($newReferenceFile, $_POST['description']."\n");
+                fputs($newReferenceFile, "0\n"); //The request has not yet been validated
+                fputs($newReferenceFile, str_replace("\n", ". ", $_POST['description'])."\n");
                 fputs($newReferenceFile, $_POST['duration']."\n");
                 fputs($newReferenceFile, $_POST['environment']."\n");
-                fputs($newReferenceFile, $_POST['referent']."\n");
+                fputs($newReferenceFile, str_replace("\n", ". ", $_POST['referent'])."\n");
                 fputs($newReferenceFile, $_POST['email']."\n");
 
                 // Array with names of categories
@@ -161,20 +162,11 @@
                         $checkboxValues .= $category . ':0,';
                     }
                 }
-                /*Pour la partie référent à inclure plus tard
-                foreach ($categories as key => $category) {
-                    if (isset($_POST['cat' . ($key + 1)])) {
-                        $checkboxValues .= $category . ':1,';
-                    } else {
-                        $checkboxValues .= $category . ':0,';
-                    }
-                }
-                */
                 $checkboxValues = rtrim($checkboxValues, ',');
                 // Save values ​​to a file
                 fputs($newReferenceFile, $checkboxValues);
                 
-                echo "<a href='referent.php?studentId=" . $studentId . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la page 2</a>";
+                echo "<a href='referent.php?studentId=" . $studentId . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
                 echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
                 fclose($newReferenceFile);
             }
