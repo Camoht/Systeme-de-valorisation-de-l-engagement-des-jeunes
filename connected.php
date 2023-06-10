@@ -1,17 +1,21 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Vous êtes connecté</title>
         <meta charset="utf-8">
+        <?php
+            include 'constants.php';
+            echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Student"].'>';
+        ?>
     </head>
     <body>
+        <?php
+            echo $_SESSION["BANDEAUJEUNE"];
+        ?>
         <div class="cadre">
     <?php
-    include 'constants.php';
-    
     function show_student(){
             // Show the content of user's file.
-
+            echo '<div>';
             //Variables
             $Table_user_content=array (
                 0 => "Nom",
@@ -19,17 +23,16 @@
                 2 => "Date de naissance",
                 3 => "E-mail"
             );
-
             //Open the user's file
             $file=fopen($_SESSION["Files"]["Data"]."/".$_SESSION["User_id"]."/user.txt", 'r');
 
             //Write the content of user's file
-            echo "<table>";
+            echo "<table class='profil'>";
             foreach($Table_user_content as $user_content){
                 echo "<tr><td>".$user_content."</td><td>".fgets($file)."</td></tr>";
             }
             echo "</table>";
-
+            echo "</div>";
             fclose($file);
         }
         show_student();
