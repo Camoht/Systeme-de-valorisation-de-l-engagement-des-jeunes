@@ -1,7 +1,7 @@
 <?php
 
     //HTML ofter used
-    $_SESSION["BANDEAU"]='
+    $_SESSION["BANDEAUJEUNE"]='     
     <div class="bandeau">
         <table class="entete">
             <tr id="jeune">
@@ -24,7 +24,75 @@
             </table>
         </div>
     </form>';
+                                                                        //The html used for the banner in each part of the project
+    $_SESSION["BANDEAUREFERENT"]='
+    <div class="bandeau">
+        <table class="entete">
+            <tr id="referent">
+                <td>RÉFÉRENT</td>
+            </tr>
+            <tr id="valeuramonengagement">
+                <td>Je confirme la valeur de ton engagement</td>
+            </tr>
+        </table>
+    </div>
+    <form method="POST" action="#">
+        <div class="selection">
+            <table class="selection tab">
+                <tr>
+                    <td id="selectionjeune">JEUNE</td>
+                    <td id="selectionreferent"> RÉFÉRENT </td>
+                    <td id="selectionconsultant"> CONSULTANT </td>
+                    <td id="selectionpartenaires"> PARTENAIRES </td>
+                </tr>
+            </table>
+        </div>
+    </form>';
 
+    $_SESSION["BANDEAUCONSULTANT"]='
+    <div class="bandeau">
+        <table class="entete">
+            <tr id="consultant">
+                <td>CONSULTANT</td>
+            </tr>
+            <tr id="valeuramonengagement">
+                <td>Je donne de la valeur à ton engagement</td>
+            </tr>
+        </table>
+    </div>
+    <form method="POST" action="#">
+        <div class="selection">
+            <table class="selection tab">
+                <tr>
+                    <td id="selectionjeune">JEUNE</td>
+                    <td id="selectionreferent"> RÉFÉRENT </td>
+                    <td id="selectionconsultant"> CONSULTANT </td>
+                    <td id="selectionpartenaires"> PARTENAIRES </td>
+                </tr>
+            </table>
+        </div>
+    </form>';
+
+    $_SESSION["BANDEAUPARTENAIRES"]='
+    <div class="bandeau">
+        <table class="entete">
+            <tr id="partenaires">
+                <td>PARTENAIRES</td>
+            </tr>
+        </table>
+    </div>
+    <form method="POST" action="#">
+        <div class="selection">
+            <table class="selection tab">
+                <tr>
+                    <td id="selectionjeune">JEUNE</td>
+                    <td id="selectionreferent"> RÉFÉRENT </td>
+                    <td id="selectionconsultant"> CONSULTANT </td>
+                    <td id="selectionpartenaires"> PARTENAIRES </td>
+                </tr>
+            </table>
+        </div>
+    </form>';
     //Information about the user
     $_SESSION["User_id"]="001";
 
@@ -81,6 +149,9 @@
         //Émilien
     $_SESSION["Files"]["Referent_welcome"]["html"]="HTML REFERENT remerciement.html";
     $_SESSION["Files"]["css"]["Student"]="student.css";
+    $_SESSION["Files"]["css"]["Referent"]="referent.css";
+    $_SESSION["Files"]["css"]["Consultant"]="consultant.css";
+    $_SESSION["Files"]["css"]["Partenaire"]="partenaires.css";
         //Nathan
     $_SESSION["Files"]["Student_welcome"]["html"]="";
     $_SESSION["Files"]["Ask_reference"]["php"]="request.php";
@@ -93,7 +164,7 @@
     $_SESSION["Files"]["Create_account"]["php"][1]="createaccount2.php";
     $_SESSION["Files"]["Create_account"]["js"]="createaccount.js";
         //Camille
-    $_SESSION["Files"]["Cansultant_welcome"]["html"]="";
+    $_SESSION["Files"]["Consultant_welcome"]["html"]="";
     $_SESSION["Files"]["Print_references"]["php"]="references.php";
     $_SESSION["Files"]["Print_references"]["js"]="createRefFile.js";
     $_SESSION["Files"]["Print_references"]["js_link"]="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js";
