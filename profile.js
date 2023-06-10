@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.readyState ==4 && this.status == 200) {
 
                 //Display php response
-                //document.getElementById("phpreponse").innerHTML = xhr.responseText;
+                document.documentElement.innerHTML = xhr.responseText;
             }
         };
 
 
         //Send variables to php
-        xhr.open("post", "profile.php", true);
+        xhr.open("post", document.getElementById('$GLOBALS[File][Change_profil][php]').innerText, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("name="+encodeURIComponent(name)+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
     });

@@ -1,34 +1,19 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="profile.js"></script>
+        <?php
+        //Include some files
+        include 'constants.php';
+        echo '<link rel="stylesheet" type="text/css" href='.$GLOBALS["File"]["css"]["Student"].'>';
+        echo '<script type="text/javascript" src='.$GLOBALS["File"]["Change_profil"]["js"].'></script>';
+        ?>
         <title>Modifier le profil</title>
         <meta charset="utf-8">
     </head>
     <body>
-		<div class="bandeau">
-			<table class="entete">
-        		<tr id="jeune">
-					<td>JEUNE</td>
-				</tr>
-				<tr id="valeuramonengagement">
-					<td>Je donne de la valeur à mon engagement</td>
-				</tr>
-			</table>
-		</div>
-        
-		<div class="selection">
-			<table class="selection tab">
-			<tr>
-			<td id="selectionjeune">JEUNE</td>
-			<td id="selectionreferent"> RÉFÉRENT </td>
-			<td id="selectionconsultant"> CONSULTANT </td>
-			<td id="selectionpartenaires"> PARTENAIRES </td>
-			</tr>
-			</table>
-		</div>
         <?php
-        include 'constants.php';
+        echo $BANDEAUJEUNE;
+        include 'constants_js.php';
+        session_start();
         
         function show_student(){
             // Show the content of user's file.
@@ -42,66 +27,48 @@
             );
 
             //Open the user's file
-            $file=fopen($_SESSION["Files"]["Data"]."/".$_SESSION["User_id"]."/user.txt", 'r');
+            $file=fopen($GLOBALS["File"]["Data"]."/".$_SESSION["User_id"]."/".$GLOBALS["File"]["inData"][0], 'r');
 
             //Write the content of user's file
-            echo "<table>";
-            foreach($Table_user_content as $user_content){
-                echo "<tr><td>".$user_content."</td><td>".fgets($file)."</td></tr>";
-            }
-            echo "</table>";
+            echo '
+            <form id="choice">
+                <div class="cadre">
+                    <table class="texte">
+                        <tr>
+                            <td>NOM: </td>
+                            <td><input type="text" name="name" id="name" value="'.fgets($file).'"/></td>
+                        </tr>
+                        <tr>
+                            <td>PRENOM: </td>
+                            <td><input type="text" name="surname" id="surname" value="'.fgets($file).'"/></td>
+                        </tr>
+                        <tr>
+                            <td>DATE DE NAISSANCE: </td>
+                            <td><input type="text" name="birth" id="birth" value="'.fgets($file).'"/></td>
+                        </tr>
+                        <tr>
+                            <td>EMAIL: </td>
+                            <td><input type="text" name="email" id="email" value="'.fgets($file).'"/></td>
+                        </tr>
+                        <tr>
+                            <td>MOT DE PASSE: </td>
+                            <td><input type="text" name="password" id="password" value="'.fgets($file).'"/></td>
+                        </tr>
+                            <td><button type="submit" name="submit">Envoyer</button></td>
+                    </table>
+                </div>
+            </form>
+            ';
 
             fclose($file);
         }
         show_student();
-        ?>
 
-        <form id="choice">
-            <div class="cadre">
-                <table class="texte">
-                    <tr>
-                        <td>NOM: </td>
-                        <td><input type='text' name='name' id="name"/></td>
-                    </tr>
-                    <tr>
-                        <td>PRENOM: </td>
-                        <td><input type='text' name='surname' id="surname"/></td>
-                    </tr>
-                    <tr>
-                        <td>DATE DE NAISSANCE: </td>
-                        <td><input type='text' name='birth' id="birth"/></td>
-                    </tr>
-                    <tr>
-                        <td>EMAIL: </td>
-                        <td><input type='text' name='email' id="email"/></td>
-                    </tr>
-                    <tr>
-                        <td>MOT DE PASSE: </td>
-                        <td><input type='text' name='password' id="password"/></td>
-                    </tr>
-                        <td><button type='submit' name='submit'>Envoyer</button></td>
-                </table>
-            </div>
-        </form>
-
-        <?php
         function empty_field(){
             //Function verifying if the fields are empty or not.
             //return 0 is all the fields are filled and 1 if they are not
 
-            if ($_POST["name"]==""){
-                return 1;
-            }
-            else if ($_POST["surname"]==""){
-                return 1;
-            }
-            else if ($_POST["birth"]==""){
-                return 1;
-            }
-            else if ($_POST["email"]==""){
-                return 1;
-            }
-            else if ($_POST["password"]==""){
+            if ($_POST["name"]=="" || $_POST["surname"]=="" || $_POST["birth"]=="" || $_POST["email"]=="" || $_POST["password"]==""){
                 return 1;
             }
             else {
@@ -161,10 +128,7 @@
             //Function verifiyng if the email adress given by the user is usable
             //Return 0 if the email adress is usable and 1 if unusable
 
-            if(stristr($_POST["email"], '@')=="") {
-                return 1;
-            }
-            if(stristr($_POST["email"], '.')=="") {
+            if(stristr($_POST["email"], '@')=="" || stristr($_POST["email"], '.')=="") {
                 return 1;
             }
             else{
@@ -204,19 +168,16 @@
         
         
             else{
-                $folder_names=scandir('Data/');
-                $folder_names=array_diff($folder_names,[".",".."]);
-        
-                $file = fopen("Data/".$_SESSION["User_id"]."/user.txt", 'w');
+                //Change data files
+                $file = fopen($GLOBALS["File"]["Data"]."/".$_SESSION["User_id"]."/".$GLOBALS["File"]["inData"][0], 'w');
                 fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
-        
+
+                //Go to
+                header('Location: '.$GLOBALS["File"]["Student_welcome"]["php"]);
+                exit();
             }
-        
         }
-
-
         ?>
-        <div id="phpreponse"></div>
     </body>
 </html>
 

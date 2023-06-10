@@ -38,29 +38,32 @@
                     fclose($file);
             }
             show_student();
-            ?>
-            <table class="texte">
+
+            echo"
+            <table class='texte'>
                 <tr>
                     <td>Modifier le profil :</td>
-                    <td><button type='submit' name='submit_profile'>Sélectionner</button></td>
+                    <td><button type='submit' name='submit_profile'><a href="."profile2.php".">Sélectionner</a><Sélectionner</button></td>
                 </tr>
                 <tr>
                     <td>Demande de référence :</td>
-                    <td><button type='submit' name='submit_request'>Sélectionner</button></td>
+                    <td><button type='submit' name='submit_request'><a href=".$GLOBALS["File"]["Ask_reference"]["php"].">Sélectionner</a></button></td>
                 </tr>
                 <tr>
                     <td>Afficher la liste de références :</td>
-                    <td><button type='submit' name='submit_list'>Sélectionner</button></td>
+                    <td><button type='submit' name='submit_list'><a href=".">Sélectionner</a></button></td>
                 </tr>
                 <tr>
                     <td>Envoyer les références au consultant :</td>
-                    <td><button type='submit' name='submit_send'>Sélectionner</button></td>
+                    <td><button type='submit' name='submit_send'><a href=".$GLOBALS["File"]["Print_references"]["php"].">Sélectionner</a></button></td>
                 </tr>
                 <tr>
                     <td>Inclure des référence au CV :</td>
-                    <td><button type='submit' name='submit_include'>Sélectionner</button></td>
+                    <td><button type='submit' name='submit_include'><a href=".$GLOBALS["File"]["Print_references"]["php"].">Sélectionner</a></button></td>
                 </tr>
             </table>
+            ";
+            ?>
 		</div>
     </body>
 </html>

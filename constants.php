@@ -119,10 +119,11 @@
     $GLOBALS["File"]["Create_account"]["php"][0]="createaccount.php";
     $GLOBALS["File"]["Create_account"]["php"][1]="createaccount2.php";
     $GLOBALS["File"]["Create_account"]["js"]="createaccount.js";
-    $GLOBALS["File"]["Connect"]["php"][0]="connect.php";
-    $GLOBALS["File"]["Connect"]["php"][1]="connect2.php";
+    $GLOBALS["File"]["Connect"]["php"]="connect.php";
     $GLOBALS["File"]["Connect"]["js"]="connect.js";
     $GLOBALS["File"]["Student_welcome"]["php"]="connected.php";
+    $GLOBALS["File"]["Change_profil"]["js"]="profile.js";
+    $GLOBALS["File"]["Change_profil"]["php"]="profile.php";
         //Camille
     $GLOBALS["File"]["Consultant_welcome"]["html"]="";
     $GLOBALS["File"]["Print_references"]["php"]="references.php";
