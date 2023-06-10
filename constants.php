@@ -103,7 +103,7 @@
     $GLOBALS["File"]["inData"][1]="refNumber.txt";
     $GLOBALS["File"]["inData"][2]="comRef";
         //Émilien
-    $GLOBALS["File"]["Referent_welcome"]["html"]="HTML REFERENT remerciement.html";
+    $GLOBALS["File"]["Referent_welcome"]="Remerciement_referent.php";
     $GLOBALS["File"]["css"]["Student"]="student.css";
     $GLOBALS["File"]["css"]["Referent"]="referent.css";
     $GLOBALS["File"]["css"]["Consultant"]="consultant.css";

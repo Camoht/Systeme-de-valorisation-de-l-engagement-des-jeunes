@@ -114,7 +114,7 @@
                         fclose($refFile);
 
                         //Go to thanks page
-                        header('Location: '.$GLOBALS["File"]["Referent_welcome"]["html"]);
+                        header('Location: '.$GLOBALS["File"]["Referent_welcome"]);
                         exit();
                     }
                 }
@@ -137,7 +137,7 @@
                         switch ($ligneCount) {
                             case 1:
                                 if ($line == "1"){  //The reference has already been validated, go to thanks page
-                                    header('Location: '.$_SESSION["Files"]["Referent_welcome"]["html"]);
+                                    header('Location: '.$_SESSION["Files"]["Referent_welcome"]);
                                     exit();
                                 } 
                             case 2:
