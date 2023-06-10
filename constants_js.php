@@ -1,6 +1,23 @@
 <?php
-    //So javascript code can get information
-    echo '
-    <div id="Create_account_php_1" value='.$_SESSION["Files"]["Create_account"]["php"][1].'>sedf</div>
-    ';
+
+    include 'constants.php';
+
+    function in_table($tab, $id){
+        //So javascript code can get information from php
+
+        foreach ($tab as $key => $value){
+            //Explore information's variables in php
+            if(gettype($value)=="array"){
+                $new_id=$id."[".$key."]";
+                in_table($value, $new_id);
+            } else {
+                //Convert in HTML so Javascript can get it
+                echo '<div id='.'$GLOBALS[File]'.$id."[".$key."]>".$value.'</div>';
+            }
+        }
+    }
+
+    echo '<div hidden id=Files_names>';
+    in_table($GLOBALS["File"], "");
+    echo '</div>';
 ?>

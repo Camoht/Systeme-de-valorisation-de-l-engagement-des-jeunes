@@ -19,10 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("phpreponse").innerHTML = xhr.responseText;
             }
         };
-
-
+        
         //Send variables to php
-        xhr.open("post", "connect.php", true);
+        xhr.open("post", document.getElementById('$GLOBALS[File][Connect][php][1]').innerText, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
     });

@@ -1,7 +1,7 @@
 <?php
 
     //HTML ofter used
-    $_SESSION["BANDEAUJEUNE"]='     
+    $BANDEAUJEUNE='     
     <div class="bandeau">
         <table class="entete">
             <tr id="jeune">
@@ -24,8 +24,8 @@
             </table>
         </div>
     </form>';
-                                                                        //The html used for the banner in each part of the project
-    $_SESSION["BANDEAUREFERENT"]='
+
+    $BANDEAUREFERENT='
     <div class="bandeau">
         <table class="entete">
             <tr id="referent">
@@ -49,7 +49,7 @@
         </div>
     </form>';
 
-    $_SESSION["BANDEAUCONSULTANT"]='
+    $BANDEAUCONSULTANT='
     <div class="bandeau">
         <table class="entete">
             <tr id="consultant">
@@ -73,7 +73,7 @@
         </div>
     </form>';
 
-    $_SESSION["BANDEAUPARTENAIRES"]='
+    $BANDEAUPARTENAIRES='
     <div class="bandeau">
         <table class="entete">
             <tr id="partenaires">
@@ -93,8 +93,41 @@
             </table>
         </div>
     </form>';
+
     //Information about the user
-    $_SESSION["User_id"]="001";
+    $_SESSION["User_id"]="";
+
+    //Files' name
+    $GLOBALS["File"]["Data"]="Data";
+    $GLOBALS["File"]["inData"][0]="user.txt";
+    $GLOBALS["File"]["inData"][1]="refNumber.txt";
+    $GLOBALS["File"]["inData"][2]="comRef";
+        //Émilien
+    $GLOBALS["File"]["Referent_welcome"]["html"]="HTML REFERENT remerciement.html";
+    $GLOBALS["File"]["css"]["Student"]="student.css";
+    $GLOBALS["File"]["css"]["Referent"]="referent.css";
+    $GLOBALS["File"]["css"]["Consultant"]="consultant.css";
+    $GLOBALS["File"]["css"]["Partenaire"]="partenaires.css";
+        //Nathan
+    $GLOBALS["File"]["Student_welcome"]["html"]="";
+    $GLOBALS["File"]["Ask_reference"]["php"]="request.php";
+    $GLOBALS["File"]["Ask_reference"]["js"][0]="link.js";
+    $GLOBALS["File"]["Ask_reference"]["js"][1]="checkboxes.js";
+        //Xavier
+    $GLOBALS["File"]["Visitor_welcome"]["php"][0]="visitor_objectives.php";
+    $GLOBALS["File"]["Visitor_welcome"]["php"][1]="visitor_partners.php";
+    $GLOBALS["File"]["Create_account"]["php"][0]="createaccount.php";
+    $GLOBALS["File"]["Create_account"]["php"][1]="createaccount2.php";
+    $GLOBALS["File"]["Create_account"]["js"]="createaccount.js";
+    $GLOBALS["File"]["Connect"]["php"][0]="connect.php";
+    $GLOBALS["File"]["Connect"]["php"][1]="connect2.php";
+    $GLOBALS["File"]["Connect"]["js"]="connect.js";
+    $GLOBALS["File"]["Student_welcome"]["php"]="connected.php";
+        //Camille
+    $GLOBALS["File"]["Consultant_welcome"]["html"]="";
+    $GLOBALS["File"]["Print_references"]["php"]="references.php";
+    $GLOBALS["File"]["Print_references"]["js"]="createRefFile.js";
+    $GLOBALS["File"]["Print_references"]["js_link"]="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js";
 
     //Text
     /*$_SESSION["Text"]["Visitor"]="
@@ -123,50 +156,4 @@
     <h3> Vous avez validé la référence. Merci pour votre participation ! </h3>
     ";
     */
-
-    //Asked field
-    $_SESSION["Ask"]["User"]=array (
-        0 => "Nom",
-        1 => "Prénom",
-        2 => "Date de naissance",
-        3 => "E-mail"
-    );
-
-    $_SESSION["Ask"]["Reference"]=array (
-        0 => "Description",
-        1 => "Durée",
-        2 => "Milieu",
-        3 => "Données personnelles du référent",
-        4 => "Adresse e-mail du référent",
-        5 => "Savoirs-êtres acquis"
-    );
-
-    //Files
-    $_SESSION["Files"]["Data"]="Data";
-    $_SESSION["Files"]["inData"][0]="user.txt";
-    $_SESSION["Files"]["inData"][1]="refNumber.txt";
-    $_SESSION["Files"]["inData"][2]="comRef";
-        //Émilien
-    $_SESSION["Files"]["Referent_welcome"]["html"]="HTML REFERENT remerciement.html";
-    $_SESSION["Files"]["css"]["Student"]="student.css";
-    $_SESSION["Files"]["css"]["Referent"]="referent.css";
-    $_SESSION["Files"]["css"]["Consultant"]="consultant.css";
-    $_SESSION["Files"]["css"]["Partenaire"]="partenaires.css";
-        //Nathan
-    $_SESSION["Files"]["Student_welcome"]["html"]="";
-    $_SESSION["Files"]["Ask_reference"]["php"]="request.php";
-    $_SESSION["Files"]["Ask_reference"]["js"][0]="link.js";
-    $_SESSION["Files"]["Ask_reference"]["js"][1]="checkboxes.js";
-        //Xavier
-    $_SESSION["Files"]["Visitor_welcome"]["php"][0]="visitor_objectives.php";
-    $_SESSION["Files"]["Visitor_welcome"]["php"][1]="visitor_partners.php";
-    $_SESSION["Files"]["Create_account"]["php"][0]="createaccount.php";
-    $_SESSION["Files"]["Create_account"]["php"][1]="createaccount2.php";
-    $_SESSION["Files"]["Create_account"]["js"]="createaccount.js";
-        //Camille
-    $_SESSION["Files"]["Consultant_welcome"]["html"]="";
-    $_SESSION["Files"]["Print_references"]["php"]="references.php";
-    $_SESSION["Files"]["Print_references"]["js"]="createRefFile.js";
-    $_SESSION["Files"]["Print_references"]["js_link"]="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js";
-
 ?>
