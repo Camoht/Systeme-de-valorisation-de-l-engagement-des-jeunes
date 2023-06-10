@@ -1,6 +1,6 @@
 body{
 	background-color: #f5f5f5;
-	background-image: url('imagejeune.png');
+	background-image: url('imagepng/imagejeune.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	
@@ -24,7 +24,7 @@ body{
 }
 .selection{
 	font-family: Arial,sans-serif;
-	margin-left: 970;
+	margin-left: 950;
 	margin-right: 1000;
 	display: flex;
 	align-items: center;
