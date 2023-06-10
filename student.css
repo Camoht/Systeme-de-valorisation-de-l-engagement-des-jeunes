@@ -5,6 +5,9 @@ body{
 	background-size: cover;
 	
 }
+
+/*The banner and the options underneath*/
+
 .bandeau{
 	display: flex;
 	width: 1900px;
@@ -14,6 +17,7 @@ body{
 	display: inline-block;
 
 }
+
 .entete{
 	font-family: Arial,sans-serif;
 	display: flex;
@@ -22,6 +26,7 @@ body{
 	justify-content: end;
 
 }
+
 .selection{
 	font-family: Arial,sans-serif;
 	margin-left: 950;
@@ -34,58 +39,12 @@ body{
 	font-size: 25px;
 }
 
-.cadre{
-	display:flex;
-	align-items: center;
-	justify-content: center;
-
-}
-.texte{
-	font-family: Arial,sans-serif;
-	color: #ec008c;
-	font-size: 30pt;
-	text-align: end;
-	margin: auto;
-	background-color: rgb(255, 255, 255);
-	border:2px solid #ec008c;
-}
-.check{
-	font-family: Arial,sans-serif;
-	color: black;
-	font-size: 20pt;
-	text-align: end;
-	/*margin-left:1400;*/
-	padding: 2px 30px ;
-	background-color:pink;
-}
-#listesavoirfaire{
-	display: inline;
-	font-family: Arial,sans-serif;
-	color: white;
-	font-size: 15pt;
-	text-align: end;
-	background-color: #ec008c;
-}
 #jeune{
 	text-align:end;
 	color: #ec008c;
 	font-size: 100px;
 }
-#referent{
-	text-align:end;
-	color: #8bb93b;
-	font-size: 100px;
-}
-#consultant{
-	text-align:end;
-	color: #00adef;
-	font-size: 100px;
-}
-#Partenaires{
-	text-align:end;
-	color: #707176;
-	font-size: 100px;
-}
+
 #valeuramonengagement{
 	color:white;
 	font-size: 40px;
@@ -115,6 +74,7 @@ body{
 	padding-left: 5px;
 	transition: 750ms;
 }
+
 #selectionjeune:hover {
 	background-color: #ec008c;
 	color:white;
@@ -135,6 +95,7 @@ body{
 	color:white;
 	padding: 0px 30px;
 }
+
 #selectionjeune:active{
 	transition: 1ms;
 	background-color: black;
@@ -151,6 +112,52 @@ body{
 	transition: 1ms;
 	background-color: black;
 }
+
+/*Every part where the user have to write or check*/
+
+.texte{
+	font-family: Arial,sans-serif;
+	color: #ec008c;
+	font-size: 30pt;
+	text-align: end;
+	margin: auto;
+	background-color: rgb(255, 255, 255);
+	border:2px solid #ec008c;
+}
+
+.check{
+	font-family: Arial,sans-serif;
+	color: black;
+	font-size: 20pt;
+	text-align: end;
+	/*margin-left:1400;*/
+	padding: 2px 30px ;
+	background-color:pink;
+}
+
+#listesavoirfaire{
+	display: inline;
+	font-family: Arial,sans-serif;
+	color: white;
+	font-size: 15pt;
+	text-align: end;
+	background-color: #ec008c;
+}
+
+/*every part where the user have to read but not be active*/
+
+.profil{
+	font-family: Arial,sans-serif;
+	color: white;
+	display: flex;
+	font-size: 20pt;
+	text-align: end;
+	background-color: pink;
+	border: solid #ec008c 2px;	
+	padding:2px 4px;
+	margin: auto;
+}
+
 h1{
 	margin-left: 800;
 	margin-right: 850;
@@ -161,6 +168,7 @@ h1{
 	align-items: center;
 	justify-content: center;
 }
+
 h3{
 	margin-left: 550;
 	margin-right: 560;
@@ -171,6 +179,4 @@ h3{
 	align-items: center;
 	justify-content: center;
 }
-.box{
-	margin-left: 1580;
-}
+
