@@ -1,49 +1,55 @@
 <html>
     <head>
-        <title>Referent</title>
-        <meta charset="utf-8">
         <?php
             include 'constants.php';
-            echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Referent"].'>';
-            echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][0].'></script>';
-            echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][1].'></script>';
-            ?>
+            echo '<link rel="stylesheet" type="text/css" href='.$GLOBALS["File"]["css"]["Referent"].'>';
+        ?>
+        <title>Referent</title>
+        <meta charset="utf-8">
     </head>
     <body>
         <?php
-             echo $_SESSION["BANDEAUREFERENT"];
+            echo $BANDEAUREFERENT;
         ?>
+
+        <!--Description of the project-->
         <table class="consigne">
             <tr>
-                <td id="titre">Bienvenue sur le site Jeune6.4 !</td>
+                <td id="titre">Bienvenue sur le site Jeunes 6.4 !</td>
             </tr>
             <tr>
-                <td id="explication">Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
-                Un jeune vous a identifié comme son référent.<br>
-                Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br></td>
+                <td id="explication">
+                Un jeune a besoin de votre aide pour valider une expérience !<br/>
+                Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
+                pour cela les jeunes peuvent faire appel à leur référent de mission pour valider leurs missions et leurs compétences.<br/>
+                C'est là que vous intervenez ! Un jeune vous a identifié comme son référent. Nous vous proposons de confirmer et valoriser son expérience ci-dessous.</td>
             </tr>
         </table>
+
         <?php
+            //Get information from link
             $refnb = $_GET['refnb'];
-            $refPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/ref' . $refnb .'.txt';
-            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/'.$_SESSION["Files"]["inData"][2]. '. $refnb .'.'txt';
-            $userPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][0];
-
-            echo "<table class='texte'>";
-            echo "<tr>";
-            echo "<td>Données de l élève :<br/></td>";
-
+            $studentId = $_GET['studentId'];
+            $refPath = $GLOBALS["File"]["Data"]."/" . $studentId . '/ref' . $refnb .'.txt';
+            $commentPath = $GLOBALS["File"]["Data"]."/" . $studentId . '/'.$GLOBALS["File"]["inData"][2]. $refnb .'.txt';
+            $userPath = $GLOBALS["File"]["Data"]."/" . $studentId . "/".$GLOBALS["File"]["inData"][0];
+            
+            //Show student's informations
+            echo "
+            <table class='texte'>
+                <tr>
+                    <td>Données de l élève :</td>
+            ";
             $ligneCount = 0;
             if(file_exists($userPath)){
                 $userFile = fopen($userPath, 'r+');
-
                 while (($line = fgets($userFile)) !== false) {
                     $ligneCount++;
 
-                    // Supprimer les espaces en début et en fin de ligne
+                    //Delete useless spaces
                     $line = trim($line);
                     
-                    // Vérifier si la ligne est vide
+                    //Check if the line is empty
                     if (!empty($line)) {
                         switch ($ligneCount) {
                             case 1:
@@ -59,17 +65,18 @@
                                 echo("<tr><td>Email : " . $line . "<br></td></tr>");
                                 break;
                             default:
-                                // Gérer le cas où une ligne supplémentaire est rencontrée ou ignorer si nécessaire
-                                break;
+                            //If there is to much lines
+                            break;
                         }
                     }
                 }
             }
 
+            //Valid knoledges
             $ligneCount = 0;
-
             if(isset($_POST['envoyer'])){
                 
+                //Create and fill the comment's file
                 touch($commentPath);
                 if (is_writable($commentPath)) {
                     $commentFile = fopen($commentPath, 'r+');
@@ -77,21 +84,22 @@
                     fclose($commentFile);
                 }
 
+                //Change value of knowledges if validated
                 if (is_writable($refPath)) {
-  
                     $refFile = fopen($refPath, 'r+');
-            
                     if ($refFile) {
                         
-                        rewind($refFile);   //Modification of first line because the reference has been validated
+                        //Modification of first line because the reference has been validated
+                        rewind($refFile);
                         fputs($refFile, "1");
 
+                        //Get informations from data file
                         $fileContent = file($refPath);
                         $lastLine = end($fileContent);
                         $wordsNumbers = explode(',', $lastLine);
 
+                        //Change value of knowledge (0 to 1)
                         $updatedValues = [];
-
                         foreach ($wordsNumbers as $wordNumber) {
                             list($word, $number) = explode(':', $wordNumber);
                             if (isset($_POST[$word])) {
@@ -105,7 +113,8 @@
 
                         fclose($refFile);
 
-                        header('Location: '.$_SESSION["Files"]["Referent_welcome"]["html"]);
+                        //Go to thanks page
+                        header('Location: '.$GLOBALS["File"]["Referent_welcome"]["html"]);
                         exit();
                     }
                 }
@@ -116,17 +125,18 @@
                 echo "<tr><td>Expérience : </td></tr>";
                 echo("<form method='POST'>");
 
+                //Display dat's information
                 while (($line = fgets($refFile)) !== false) {
                     $ligneCount++;
 
-                    // Supprimer les espaces en début et en fin de ligne
+                    //Delete useless spaces
                     $line = trim($line);
                     
-                    // Vérifier si la ligne est vide
+                    //Check if line is empty
                     if (!empty($line)) {
                         switch ($ligneCount) {
                             case 1:
-                                if ($line == "1"){  //The reference has already been validated
+                                if ($line == "1"){  //The reference has already been validated, go to thanks page
                                     header('Location: '.$_SESSION["Files"]["Referent_welcome"]["html"]);
                                     exit();
                                 } 
@@ -143,16 +153,16 @@
                                 echo("<tr><td>Données du référent : " . str_replace('&é(-è_çà', "<br>", $line) . "<br></td></tr>");
                                 break;
                             case 7:
-                                // Diviser la dernière ligne en mots et numéros en utilisant une virgule comme séparateur
+                                //Divide last line with comma as seperators
                                 $motsNumeros = explode(',', $line);
 
-                                // Afficher les mots et les numéros associés
+                                //Display words and associated numbers
                                 echo("<tr><td>Savoir-faires (Cochez si vous approuvez)<br></td></tr>");
                                 foreach ($motsNumeros as $motNumero) {
-                                    // Diviser chaque mot et numéro
+                                    //Divide each word from their numbers
                                     list($mot, $numero) = explode(':', $motNumero);
 
-                                    // Afficher le mot et la case à cocher
+                                    //Display knowledge and checkboxes associated
                                     echo '<tr><td>';
                                     echo $mot;
                                     echo '<input type="checkbox" name="' . $mot . '" value="1"><br>';
@@ -160,7 +170,7 @@
                                 }
                                 break;
                             default:
-                                // Gérer le cas où une ligne supplémentaire est rencontrée ou ignorer si nécessaire
+                                //If there is to much lines
                                 break;
                         }
                     }
