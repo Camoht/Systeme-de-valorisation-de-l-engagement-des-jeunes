@@ -13,17 +13,25 @@
         <?php
              echo $_SESSION["BANDEAUREFERENT"];
         ?>
-        <h2>Bienvenue sur le site Jeune6.4 !</h2>
-        Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
-        Un jeune vous a identifié comme son référent.<br>
-        Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br>
+        <table class="consigne">
+            <tr>
+                <td id="titre">Bienvenue sur le site Jeune6.4 !</td>
+            </tr>
+            <tr>
+                <td id="explication">Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
+                Un jeune vous a identifié comme son référent.<br>
+                Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br></td>
+            </tr>
+        </table>
         <?php
             $refnb = $_GET['refnb'];
             $refPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/ref' . $refnb .'.txt';
             $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/'.$_SESSION["Files"]["inData"][2]. '. $refnb .'.'txt';
             $userPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][0];
 
-            echo "Données de l élève :<br/>";
+            echo "<table class='texte'>";
+            echo "<tr>";
+            echo "<td>Données de l élève :<br/></td>";
 
             $ligneCount = 0;
             if(file_exists($userPath)){
@@ -39,16 +47,16 @@
                     if (!empty($line)) {
                         switch ($ligneCount) {
                             case 1:
-                                echo("Nom : " . $line . "<br>");
+                                echo("<tr><td>Nom : " . $line . "<br></td></tr>");
                                 break;
                             case 2:
-                                echo("Prénom : " . $line . "<br>");
+                                echo("<tr><td>Prénom : " . $line . "<br></td></tr>");
                                 break;
                             case 3:
-                                echo("Date de naissance : " . str_replace("_", "/", $line . "<br>"));
+                                echo("<tr><td>Date de naissance : " . str_replace("_", "/", $line . "<br></td></tr>"));
                                 break;
                             case 4:
-                                echo("Email : " . $line . "<br>");
+                                echo("<tr><td>Email : " . $line . "<br></td></tr>");
                                 break;
                             default:
                                 // Gérer le cas où une ligne supplémentaire est rencontrée ou ignorer si nécessaire
@@ -105,7 +113,7 @@
 
             if(file_exists($refPath)){
                 $refFile = fopen($refPath, 'r+');
-                echo "Expérience : ";
+                echo "<tr><td>Expérience : </td></tr>";
                 echo("<form method='POST'>");
 
                 while (($line = fgets($refFile)) !== false) {
@@ -123,30 +131,32 @@
                                     exit();
                                 } 
                             case 2:
-                                echo("Description de l'engagement : " . str_replace('&é(-è_çà', "<br>", $line) . "<br>");
+                                echo("<tr><td>Description de l'engagement : " . str_replace('&é(-è_çà', "<br>", $line) . "<br></td></tr>");
                                 break;
                             case 3:
-                                echo("Durée de l'engagement : " . $line . "<br>");
+                                echo("<tr><td>Durée de l'engagement : " . $line . "<br></td></tr>");
                                 break;
                             case 4:
-                                echo("Lieu : " . $line . "<br>");
+                                echo("<tr><td>Lieu : " . $line . "<br></td></tr>");
                                 break;
                             case 5:
-                                echo("Données du référent : " . str_replace('&é(-è_çà', "<br>", $line) . "<br>");
+                                echo("<tr><td>Données du référent : " . str_replace('&é(-è_çà', "<br>", $line) . "<br></td></tr>");
                                 break;
                             case 7:
                                 // Diviser la dernière ligne en mots et numéros en utilisant une virgule comme séparateur
                                 $motsNumeros = explode(',', $line);
 
                                 // Afficher les mots et les numéros associés
-                                echo("Savoir-faires (Cochez si vous approuvez)<br>");
+                                echo("<tr><td>Savoir-faires (Cochez si vous approuvez)<br></td></tr>");
                                 foreach ($motsNumeros as $motNumero) {
                                     // Diviser chaque mot et numéro
                                     list($mot, $numero) = explode(':', $motNumero);
 
                                     // Afficher le mot et la case à cocher
+                                    echo '<tr><td>';
                                     echo $mot;
                                     echo '<input type="checkbox" name="' . $mot . '" value="1"><br>';
+                                    echo '</td></tr>';
                                 }
                                 break;
                             default:
@@ -155,10 +165,11 @@
                         }
                     }
                 }
-                echo "Commentaires éventuels :<textarea type='text' name='comment'></textarea>";
+                echo "<tr><td>Commentaires éventuels :<textarea type='text' name='comment'></textarea></td></tr>";
                 fclose($refFile);
-                echo "<button type='submit' name='envoyer'>Envoyer</button>";
+                echo "<tr><td><button type='submit' name='envoyer'>Envoyer</button></td></tr>";
                 echo("</form>");
+                echo "</table>";
             }
             else{
                 echo("Erreur lors de l'ouverture de la référence");
