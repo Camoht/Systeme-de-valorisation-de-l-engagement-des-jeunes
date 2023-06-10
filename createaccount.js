@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.readyState ==4 && this.status == 200) {
 
                 //Display php response
-                document.getElementById("phpreponse").innerHTML = xhr.responseText;
+                document.documentElement.innerHTML = xhr.responseText;
             }
         };
-
-        console.log(document.getElementById("Create_account_php_1").value);
+        
+        console.log(document.getElementById('$GLOBALS[File][Create_account][php][0]').value);
         //Send variables to php
-        xhr.open("post", document.getElementById("Create_account_php_1").value, true);
+        xhr.open("post", document.getElementById('$GLOBALS[File][Create_account][php][0]').innerText, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("name="+encodeURIComponent(name)+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
     });
