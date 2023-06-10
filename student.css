@@ -149,13 +149,12 @@ body{
 .profil{
 	font-family: Arial,sans-serif;
 	color: white;
-	display: flex;
 	font-size: 20pt;
 	text-align: end;
+	display: inline-block;
 	background-color: pink;
 	border: solid #ec008c 2px;	
 	padding:2px 4px;
-	margin: auto;
 }
 
 h1{
