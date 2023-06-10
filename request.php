@@ -12,7 +12,7 @@
     </head>
     <body>
       <?php
-      echo $_SESSION["BANDEAU"];
+      echo $_SESSION["BANDEAUJEUNE"];
       ?>
         <h3>Créer une demande de référence</h3>
         <form method='POST' action="#">
