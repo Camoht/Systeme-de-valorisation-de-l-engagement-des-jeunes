@@ -1,0 +1,163 @@
+body{
+	background-color: #f5f5f5;
+	background-image: url('logo.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+}
+.bandeau{
+	display: flex;
+	width: 1900px;
+	background-color: rgb(196, 193, 193);
+	background-image: url(logo.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+
+}
+.entete{
+	font-family: Arial,sans-serif;
+	display: flex;
+	align-items: end;
+	text-align: end;
+	justify-content: end;
+
+}
+.selection{
+	font-family: Arial,sans-serif;
+	margin-left: 970;
+	margin-right: 1000;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	background-color:rgb(196, 193, 193) ;
+	font-size: 25px;
+}
+
+.cadre{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+
+}
+.texte{
+	font-family: Arial,sans-serif;
+	color: #ec008c;
+	font-size: 30pt;
+	text-align: end;
+	margin: auto;
+	background-color: rgb(255, 255, 255);
+	border:2px solid #ec008c;
+}
+.check{
+	font-family: Arial,sans-serif;
+	color: black;
+	font-size: 20pt;
+	text-align: end;
+	/*margin-left:1400;*/
+	padding: 2px 30px ;
+	background-color:pink;
+}
+#listesavoirfaire{
+	display: inline;
+	font-family: Arial,sans-serif;
+	color: white;
+	font-size: 15pt;
+	text-align: end;
+	background-color: #ec008c;
+}
+
+#referent{
+	text-align:end;
+	color: #8bb93b;
+	font-size: 100px;
+}
+
+#valeuramonengagement{
+	color:white;
+	font-size: 40px;
+}
+
+#selectionjeune{
+	color:#ec008c;
+	padding-left: 10px;
+	padding-right: 5px;
+	transition: 750ms;
+}
+#selectionreferent{
+	color:#8bb93b;
+	padding-right: 5px;
+	padding-left: 5px;
+	transition: 750ms;
+}
+#selectionconsultant{
+	color: #00adef;
+	padding-left: 5px;
+	padding-right: 5px;
+	transition: 750ms;
+}
+#selectionpartenaires{
+	color:#707176;
+	padding-right: 10px;
+	padding-left: 5px;
+	transition: 750ms;
+}
+#selectionjeune:hover {
+	background-color: #ec008c;
+	color:white;
+	padding: 0px 30px;
+}
+#selectionreferent:hover {
+	background-color:#8bb93b;
+	color:white;
+	padding: 0px 30px;
+}
+#selectionconsultant:hover {
+	background-color: #00adef;
+	color:white;
+	padding: 0px 30px;
+}
+#selectionpartenaires:hover {
+	background-color: #707176;
+	color:white;
+	padding: 0px 30px;
+}
+#selectionjeune:active{
+	transition: 1ms;
+	background-color: black;
+}
+#selectionreferent:active{
+	transition: 1ms;
+	background-color: black;
+}
+#selectionconsultant:active{
+	transition: 1ms;
+	background-color: black;
+}
+#selectionpartenaires:active{
+	transition: 1ms;
+	background-color: black;
+}
+h1{
+	margin-left: 800;
+	margin-right: 850;
+	color: white;
+	background-color: #8bb93b;
+	font-size: 50px;
+	font-family: Arial,sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+h3{
+	margin-left: 550;
+	margin-right: 560;
+	color: white;
+	background-image:linear-gradient(45deg,#8bb93b,#588a03);
+	font-size: 50px;
+	font-family: Arial,sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+.box{
+	margin-left: 1580;
+}
