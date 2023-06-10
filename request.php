@@ -150,9 +150,33 @@
                 $checkboxValues = rtrim($checkboxValues, ',');
                 // Save values ​​to a file
                 fputs($newReferenceFile, $checkboxValues);
+
+                $relativLink = "/ProjetWeb/referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm;
+                $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+                $adresseSite .= $_SERVER['HTTP_HOST'];
+                $completeadresse = $adresseSite . $relativLink;
+
                 
-                echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
-                echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
+                
+                $to = $_POST['email'];
+                //$to = "leprojetjeunes64@gmail.com"; //Pour les tests
+                $from ="leprojetjeunes64@gmail.com";
+                $subject = "Demande de validation d'engagement d'un jeune";
+                $message = "Bonjour, \n
+                Un jeune a besoin de votre aide pour valider une expérience !\n\n
+                Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
+                pour cela les jeunes peuvent faire appel à leur référent de mission pour valider leurs missions et leurs compétences.\n
+                C'est là que vous intervenez ! Vous pouvez permettre cette validation en cliquant sur le lien ci-dessous : \n"
+                . $completeadresse;
+                $headers = ['From' => $from];
+                if(mail($to, $subject, $message, $headers)){
+                  echo "Le mail a bien été envoyé !";
+                }
+                else{
+                  echo "Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : ";
+                  echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
+                  echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
+                }
                 fclose($newReferenceFile);
             }
         ?>
