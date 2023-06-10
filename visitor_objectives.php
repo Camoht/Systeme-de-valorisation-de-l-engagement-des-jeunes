@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Espace visiteur</title>
@@ -20,10 +19,10 @@
         include 'constants.php';
 
         //Button to create an account
-        echo '<a href='.$_SESSION["Files"]["Create_account"]["php"][0].'><button>Créer un compte</button></a>';
+        echo '<a href='.$GLOBALS["File"]["Create_account"]["php"].'><button>Créer un compte</button></a>';
         
         //Button to show the second page accessible by the visitors about the partners
-        echo '<a href='.$_SESSION["Files"]["Visitor_welcome"]["php"][1].'><button>Voir les partenaires</button></a>';
+        echo '<a href='.$GLOBALS["File"]["Visitor_welcome"]["php"][1].'><button>Voir les partenaires</button></a>';
         ?>
 
     </body>

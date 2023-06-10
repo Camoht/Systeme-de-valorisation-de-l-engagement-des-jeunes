@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php
+        //Include some files
+        include 'constants.php';
+        ?>
         <title>Espace visiteur</title>
         <meta charset="utf-8">
     </head>
@@ -13,14 +17,11 @@
         </p>
         
         <?php
-        //Include some files
-        include 'constants.php';
-
         //Button to create an account
-        echo '<a href='.$_SESSION["Files"]["Create_account"]["php"][0].'><button>Créer un compte</button></a>';
+        echo '<a href='.$GLOBALS["File"]["Create_account"]["php"].'><button>Créer un compte</button></a>';
         
         //Button to show the first page accessible by the visitors about the objectives
-        echo '<a href='.$_SESSION["Files"]["Visitor_welcome"]["php"][0].'><button>Voir les objectifs</button></a>';
+        echo '<a href='.$GLOBALS["File"]["Visitor_welcome"]["php"][0].'><button>Voir les objectifs</button></a>';
         ?>
 
     </body>
