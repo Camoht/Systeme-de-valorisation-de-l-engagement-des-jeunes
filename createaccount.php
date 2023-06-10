@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html>
     <head>
         <?php
         //Include some files
         include 'constants.php';
         echo '<script type="text/javascript" src='.$_SESSION["Files"]["Create_account"]["js"].'></script>';
+        echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Student"].'>';
         ?>
 
         <title>Créer un compte</title>
@@ -12,8 +12,7 @@
     </head>
     <body>
         <?php
-        include 'constants_js.php';
-        echo $_SESSION["BANDEAU"];
+        echo $_SESSION["BANDEAUJEUNE"]; 
         ?>
 
         <!--Give to the user, te abilitie to give informations-->
