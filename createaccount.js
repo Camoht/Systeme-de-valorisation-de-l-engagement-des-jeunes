@@ -23,9 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
         
-        console.log(document.getElementById('$GLOBALS[File][Create_account][php][0]').value);
         //Send variables to php
-        xhr.open("post", document.getElementById('$GLOBALS[File][Create_account][php][0]').innerText, true);
+        xhr.open("post", document.getElementById('$GLOBALS[File][Create_account][php]').innerText, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("name="+encodeURIComponent(name)+"&surname="+encodeURIComponent(surname)+"&birth="+encodeURIComponent(birth)+"&email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password));
     });

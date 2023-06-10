@@ -143,6 +143,7 @@
                 echo"L'adresse email fournie est erronée. <br/>";
             }
             else{
+                echo 'bibu';
                 //Create the data file of the new user
                 $folder_names=scandir($GLOBALS["File"]["Data"].'/');
                 $folder_names=array_diff($folder_names,[".",".."]);
@@ -152,6 +153,8 @@
 
                 //Fill the new file with data
                 fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
+                
+                fclose($file);
             }
         }
         ?>

@@ -116,8 +116,7 @@
         //Xavier
     $GLOBALS["File"]["Visitor_welcome"]["php"][0]="visitor_objectives.php";
     $GLOBALS["File"]["Visitor_welcome"]["php"][1]="visitor_partners.php";
-    $GLOBALS["File"]["Create_account"]["php"][0]="createaccount.php";
-    $GLOBALS["File"]["Create_account"]["php"][1]="createaccount2.php";
+    $GLOBALS["File"]["Create_account"]["php"]="createaccount.php";
     $GLOBALS["File"]["Create_account"]["js"]="createaccount.js";
     $GLOBALS["File"]["Connect"]["php"]="connect.php";
     $GLOBALS["File"]["Connect"]["js"]="connect.js";
