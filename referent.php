@@ -2,20 +2,28 @@
     <head>
         <title>Referent</title>
         <meta charset="utf-8">
+        <?php
+            include 'constants.php';
+            echo '<link rel="stylesheet" type="text/css" href='.$_SESSION["Files"]["css"]["Referent"].'>';
+            echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][0].'></script>';
+            echo '<script src='.$_SESSION["Files"]["Ask_reference"]["js"][1].'></script>';
+            ?>
     </head>
     <body>
+        <?php
+             echo $_SESSION["BANDEAUREFERENT"];
+        ?>
         <h2>Bienvenue sur le site Jeune6.4 !</h2>
         Ce site permet aux jeunes de mettre en avant leurs expériences professionnels (stages, bénévolats, etc...).<br>
         Un jeune vous a identifié comme son référent.<br>
         Nous vous proposons de confirmer et valoriser son expérience ci-dessous.<br>
         <?php
-            include 'constants.php';
             $refnb = $_GET['refnb'];
             $refPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/ref' . $refnb .'.txt';
-            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/'.$_SESSION["Files"]["inData"][2].' . $refnb .'.txt';
+            $commentPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . '/'.$_SESSION["Files"]["inData"][2]. '. $refnb .'.'txt';
             $userPath = $_SESSION["Files"]["Data"]."/" . $_SESSION["User_id"] . "/".$_SESSION["Files"]["inData"][0];
 
-            echo "Données de l'élève :<br/>";
+            echo "Données de l élève :<br/>";
 
             $ligneCount = 0;
             if(file_exists($userPath)){
