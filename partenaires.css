@@ -9,7 +9,7 @@ body{
 	display: flex;
 	width: 1900px;
 	background-color: rgb(196, 193, 193);
-	background-image: url(logo.png);
+	background-image: url('imagepng/logo.png');
 	background-repeat: no-repeat;
 	display: inline-block;
 
