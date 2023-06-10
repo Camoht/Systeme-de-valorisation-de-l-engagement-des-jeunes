@@ -178,7 +178,7 @@
           echo "Le mail a bien été envoyé !";
         }
         else{
-          echo "Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : ";
+          echo "<h4>Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : </h4>";
           echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
           echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
         }
