@@ -202,7 +202,7 @@
                             //Send the link
                             $to = $_POST['email'];
                             $from ="leprojetjeunes64@gmail.com";
-                            $subject = "Partge de l'engagement d'un jeune";
+                            $subject = "Partage de l'engagement d'un jeune";
                             $message = "Bonjour,\n
                             Un jeune vous partage son expérience !\n\n
                             Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
