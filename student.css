@@ -173,14 +173,15 @@ body{
 /*every part where the user have to read but not be active*/
 
 .profil{
+	margin-left: 200px;
 	font-family: Arial,sans-serif;
 	color: white;
 	font-size: 20pt;
-	text-align: end;
-	display: inline-block;
+	text-align: center;
 	background-color: pink;
 	border: solid #ec008c 2px;	
 	padding:2px 4px;
+	margin-bottom: 50px;
 }
 
 h1{
@@ -212,4 +213,3 @@ h4{
 	color: #ec008c;
 	font-size: 20px;
 }
-
