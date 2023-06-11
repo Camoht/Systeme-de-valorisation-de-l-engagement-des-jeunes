@@ -156,7 +156,7 @@
         fputs($newReferenceFile, $checkboxValues);
 
         //Create absolute link
-        $relativLink = "/ProjetWeb/referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm;
+        $relativLink = dirname($_SERVER['SCRIPT_NAME']) . "/referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm;
         $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
         $adresseSite .= $_SERVER['HTTP_HOST'];
         $completeadresse = $adresseSite . $relativLink;
