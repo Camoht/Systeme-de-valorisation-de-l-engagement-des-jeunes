@@ -5,6 +5,9 @@ body{
 	background-size: cover;
 	
 }
+
+/*The banner and the options underneath*/
+
 .bandeau{
 	display: flex;
 	width: 1900px;
@@ -14,6 +17,7 @@ body{
 	display: inline-block;
 
 }
+
 .entete{
 	font-family: Arial,sans-serif;
 	display: flex;
@@ -22,6 +26,7 @@ body{
 	justify-content: end;
 
 }
+
 .selection{
 	font-family: Arial,sans-serif;
 	margin-left: 970;
@@ -32,39 +37,6 @@ body{
 	justify-content: center;
 	background-color:rgb(196, 193, 193) ;
 	font-size: 25px;
-}
-
-.cadre{
-	display:flex;
-	align-items: center;
-	justify-content: center;
-
-}
-.texte{
-	font-family: Arial,sans-serif;
-	color: #588a03;
-	display: inline-block;
-	font-size: 20px;
-	margin: auto;
-	background-color: rgb(255, 255, 255);
-	border:2px solid #588a03;
-}
-.check{
-	font-family: Arial,sans-serif;
-	color: black;
-	font-size: 20pt;
-	text-align: end;
-	/*margin-left:1400;*/
-	padding: 2px 30px ;
-	background-color:pink;
-}
-#listesavoirfaire{
-	display: inline;
-	font-family: Arial,sans-serif;
-	color: white;
-	font-size: 15pt;
-	text-align: end;
-	background-color: #8bb93b;
 }
 
 #referent{
@@ -166,6 +138,39 @@ body{
 	transition: 1ms;
 	background-color: black;
 }
+
+/*Every part where the user have to write or check*/
+
+.texte{
+	font-family: Arial,sans-serif;
+	color: #588a03;
+	display: inline-block;
+	font-size: 20px;
+	margin: auto;
+	background-color: rgb(255, 255, 255);
+	border:2px solid #588a03;
+}
+.check{
+	font-family: Arial,sans-serif;
+	color: black;
+	font-size: 20pt;
+	text-align: end;
+	/*margin-left:1400;*/
+	padding: 2px 30px ;
+	background-color:pink;
+}
+
+#listesavoirfaire{
+	display: inline;
+	font-family: Arial,sans-serif;
+	color: white;
+	font-size: 15pt;
+	text-align: end;
+	background-color: #8bb93b;
+}
+
+/*every part where the user have to read but not be active*/
+
 
 h1{
 	margin-left: 800;
