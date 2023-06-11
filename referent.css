@@ -72,18 +72,6 @@ body{
 	color: #8bb93b;
 	font-size: 100px;
 }
-#selectionjeune a{
-	color:#ec008c;
-}
-#selectionreferent a{
-	color:#8bb93b;
-}
-#selectionconsultant a{
-	color:#00adef;
-}
-#selectionpartenaires a{
-	color:#707176;
-}
 
 #valeuramonengagement{
 	color:white;
@@ -91,49 +79,77 @@ body{
 }
 
 #selectionjeune{
-	color:#ec008c;
 	padding-left: 10px;
 	padding-right: 5px;
 	transition: 750ms;
 }
+#selectionjeune a{
+	color:#ec008c;
+}
+
 #selectionreferent{
+	padding-right: 5px;
+	padding-left: 5px;
+	transition: 750ms;
+}
+#selectionreferent a{
 	color:#8bb93b;
-	padding-right: 5px;
-	padding-left: 5px;
-	transition: 750ms;
 }
+
 #selectionconsultant{
-	color: #00adef;
 	padding-left: 5px;
 	padding-right: 5px;
 	transition: 750ms;
 }
+#selectionconsultant a{
+	color:#00adef;
+}
+
 #selectionpartenaires{
-	color:#707176;
 	padding-right: 10px;
 	padding-left: 5px;
 	transition: 750ms;
 }
+#selectionpartenaires a{
+	color:#707176;
+}
+
 #selectionjeune:hover {
 	background-color: #ec008c;
-	color:white;
 	padding: 0px 30px;
 }
+#selectionjeune:hover a{
+	transition: 750ms;
+	color:white;
+}
+
 #selectionreferent:hover {
 	background-color:#8bb93b;
-	color:white;
 	padding: 0px 30px;
 }
+#selectionreferent:hover a{
+	transition: 750ms;
+	color:white;
+}
+
 #selectionconsultant:hover {
 	background-color: #00adef;
-	color:white;
 	padding: 0px 30px;
 }
+#selectionconsultant:hover a{
+	transition: 750ms;
+	color:white;
+}
+
 #selectionpartenaires:hover {
 	background-color: #707176;
-	color:white;
 	padding: 0px 30px;
 }
+#selectionpartenaires:hover a{
+	transition: 750ms;
+	color:white;
+}
+
 #selectionjeune:active{
 	transition: 1ms;
 	background-color: black;
@@ -150,6 +166,7 @@ body{
 	transition: 1ms;
 	background-color: black;
 }
+
 h1{
 	margin-left: 800;
 	margin-right: 850;
@@ -160,7 +177,6 @@ h1{
 	align-items: center;
 	justify-content: center;
 }
-
 #titre{
 	color: white;
 	background-image:linear-gradient(45deg,#8bb93b,#588a03);
@@ -178,5 +194,4 @@ h4{
 	color:#588a03;
 	font-size: 30px;
 }
-
 
