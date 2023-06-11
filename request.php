@@ -89,102 +89,105 @@
       <button type='submit' name='envoyer'>Envoyer</button>
     </form>
     <?php
-      echo $BACK;
-      if(isset($_POST['envoyer'])){
-        //Verification of the number of references for this user
-        $refNumberPath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"];
-        if(!is_dir($refNumberPath)){ //Unnecessary precautions (if the user doesn't have data file)
-          mkdir($refNumberPath, 0777, true);
-        }
-        if(!file_exists($refNumberPath . "/".$GLOBALS["File"]["inData"][1])){ //Create necessary file
-          touch($refNumberPath . "/".$GLOBALS["File"]["inData"][1]);
-        }
-        $refNumberPath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . "/".$GLOBALS["File"]["inData"][1];
-        $refNumberFile = fopen($refNumberPath, 'r+');
-        if(filesize($refNumberPath) === 0){ //First reference
-          fputs($refNumberFile, '001');
-          $refNumber = 1;
-        }
-        else{ //Update the reference's number
-          $refNumber = intval(fgets($refNumberFile));
-          $refNumber++;
-        }
-
-        //Retrieval of the number of references
-        $refNumberForm = str_pad($refNumber, 3, '0', STR_PAD_LEFT);
-        fseek($refNumberFile, 0);
-        fputs($refNumberFile, $refNumberForm);
-        fclose($refNumberFile);
-
-        //Create reference's file
-        $newReference = 'ref' . $refNumberForm . '.txt';
-        touch($GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference);
-        $newReferencePath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference;
-        $newReferenceFile = fopen($newReferencePath, 'w+');
-        fputs($newReferenceFile, "0\n"); //The request has not yet been validated
-        fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['description'])."\n");
-        fputs($newReferenceFile, $_POST['duration']."\n");
-        fputs($newReferenceFile, $_POST['environment']."\n");
-        fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['referent'])."\n");
-        fputs($newReferenceFile, $_POST['email']."\n");
-
-        //Array with names of categories
-        $categories = array(
-          'Autonome',
-          'Passionné',
-          'Réfléchi',
-          'À l\'écoute',
-          'Organisé',
-          'Fiable',
-          'Patient',
-          'Responsable',
-          'Sociable',
-          'Optimiste'
-        );
-
-        //String to store checkbox values
-        $checkboxValues = '';
-        //Category path
-        foreach ($categories as $key => $category) {
-          //Check if the box is checked
-          if (isset($_POST['cat' . ($key + 1)])) {
-            //Checkbox is checked, append "0" to string
-            $checkboxValues .= $category . ':0,';
+      if(isset($_SESSION['User_id'])){
+        echo $BACK;
+        if(isset($_POST['envoyer'])){
+          //Verification of the number of references for this user
+          $refNumberPath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"];
+          if(!is_dir($refNumberPath)){ //Unnecessary precautions (if the user doesn't have data file)
+            mkdir($refNumberPath, 0777, true);
           }
-        }
-        $checkboxValues = rtrim($checkboxValues, ',');
-        //Save values ​​to a file
-        fputs($newReferenceFile, $checkboxValues);
+          if(!file_exists($refNumberPath . "/".$GLOBALS["File"]["inData"][1])){ //Create necessary file
+            touch($refNumberPath . "/".$GLOBALS["File"]["inData"][1]);
+          }
+          $refNumberPath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . "/".$GLOBALS["File"]["inData"][1];
+          $refNumberFile = fopen($refNumberPath, 'r+');
+          if(filesize($refNumberPath) === 0){ //First reference
+            fputs($refNumberFile, '001');
+            $refNumber = 1;
+          }
+          else{ //Update the reference's number
+            $refNumber = intval(fgets($refNumberFile));
+            $refNumber++;
+          }
 
-        //Create absolute link
-        $relativLink = dirname($_SERVER['SCRIPT_NAME']) . "/".$GLOBALS["File"]["Confirm_reference"]["php"]."?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm;
-        $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-        $adresseSite .= $_SERVER['HTTP_HOST'];
-        $completeadresse = $adresseSite . $relativLink;
-        
-        //Send the link
-        $to = $_POST['email'];
-        $from ="leprojetjeunes64@gmail.com";
-        $subject = "Demande de validation d'engagement d'un jeune";
-        $message = "Bonjour,\n
-        Un jeune a besoin de votre aide pour valider une expérience !\n\n
-        Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
-        pour cela les jeunes peuvent faire appel à leur référent de mission pour valider leurs missions et leurs compétences.\n
-        C'est là que vous intervenez ! Un jeune vous a identifié comme son référent. Vous pouvez permettre cette validation en cliquant sur le lien ci-dessous :\n"
-        . $completeadresse;
-        $headers = ['From' => $from];
+          //Retrieval of the number of references
+          $refNumberForm = str_pad($refNumber, 3, '0', STR_PAD_LEFT);
+          fseek($refNumberFile, 0);
+          fputs($refNumberFile, $refNumberForm);
+          fclose($refNumberFile);
 
-        //Notice the user the status of the mail
-        if(mail($to, $subject, $message, $headers)){
-          echo "Le mail a bien été envoyé !";
+          //Create reference's file
+          $newReference = 'ref' . $refNumberForm . '.txt';
+          touch($GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference);
+          $newReferencePath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"] . '/' . $newReference;
+          $newReferenceFile = fopen($newReferencePath, 'w+');
+          fputs($newReferenceFile, "0\n"); //The request has not yet been validated
+          fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['description'])."\n");
+          fputs($newReferenceFile, $_POST['duration']."\n");
+          fputs($newReferenceFile, $_POST['environment']."\n");
+          fputs($newReferenceFile, str_replace("\n", "&é(-è_çà", $_POST['referent'])."\n");
+          fputs($newReferenceFile, $_POST['email']."\n");
+
+          //Array with names of categories
+          $categories = array(
+            'Autonome',
+            'Passionné',
+            'Réfléchi',
+            'À l\'écoute',
+            'Organisé',
+            'Fiable',
+            'Patient',
+            'Responsable',
+            'Sociable',
+            'Optimiste'
+          );
+
+          //String to store checkbox values
+          $checkboxValues = '';
+          //Category path
+          foreach ($categories as $key => $category) {
+            //Check if the box is checked
+            if (isset($_POST['cat' . ($key + 1)])) {
+              //Checkbox is checked, append "0" to string
+              $checkboxValues .= $category . ':0,';
+            }
+          }
+          $checkboxValues = rtrim($checkboxValues, ',');
+          //Save values ​​to a file
+          fputs($newReferenceFile, $checkboxValues);
+
+          //Create absolute link
+          $relativLink = dirname($_SERVER['SCRIPT_NAME']) . "/".$GLOBALS["File"]["Confirm_reference"]["php"]."?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm;
+          $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+          $adresseSite .= $_SERVER['HTTP_HOST'];
+          $completeadresse = $adresseSite . $relativLink;
+          
+          //Send the link
+          $to = $_POST['email'];
+          $from ="leprojetjeunes64@gmail.com";
+          $subject = "Demande de validation d'engagement d'un jeune";
+          $message = "Bonjour,\n
+          Un jeune a besoin de votre aide pour valider une expérience !\n\n
+          Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
+          pour cela les jeunes peuvent faire appel à leur référent de mission pour valider leurs missions et leurs compétences.\n
+          C'est là que vous intervenez ! Un jeune vous a identifié comme son référent. Vous pouvez permettre cette validation en cliquant sur le lien ci-dessous :\n"
+          . $completeadresse;
+          $headers = ['From' => $from];
+
+          //Notice the user the status of the mail
+          if(mail($to, $subject, $message, $headers)){
+            echo "Le mail a bien été envoyé !";
+          }
+          else{
+            echo "<h4>Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : </h4>";
+            echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
+            echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
+          }
+          fclose($newReferenceFile);
         }
-        else{
-          echo "<h4>Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : </h4>";
-          echo "<a href='referent.php?studentId=" . $_SESSION["User_id"] . "&refnb=" . $refNumberForm . "' id='link'>Lien vers la demande</a>";
-          echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
-        }
-        fclose($newReferenceFile);
       }
+      else echo "Vous n'avez pas la permission d'envoyer depuis cette page";
     ?>
   </body>
 </html>
