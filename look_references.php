@@ -146,7 +146,6 @@
                 for($i=1; $i<count($file_names); $i++){
                     show_ref($i);
                 }
-                echo "</form>";
             }
         }
 

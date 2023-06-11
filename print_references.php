@@ -7,6 +7,7 @@
         include 'constants.php';
         echo '<link rel="stylesheet" type="text/css" href='.$GLOBALS["File"]["css"]["Student"].'>';
         echo '<script type="text/javascript" src='.$GLOBALS["File"]["Print_references"]["js"].'></script>';
+        echo '<script type="text/javascript" src='.$GLOBALS["File"]["Print_references"]["js_link"].'></script>';
         ?>
 
         <title>Mes références</title>
@@ -78,6 +79,8 @@
                 4 => "Adresse e-mail du référent",
                 5 => "Savoirs-êtres acquis"
             );
+
+            //if(document.getElementById(ref_id).checked==true){
 
             //Open the reference's file
             $ref_id="ref".nb_zero($i).$i.".txt";
@@ -169,24 +172,24 @@
             } else {
 
                 //Ask what the student whant to do
-                echo "<div id=choice>";
-                echo "Créer un fichier avec les références séléctionnée :";
-                echo '<input type="radio" name="drone" value="HTML" id="HTML" checked><label for="HTML">HTML</label>';
-                echo '<input type="radio" name="drone" value="PDF" id="PDF"><label for="PDF">PDF</label>';
-                echo "<button name='boutton' id='valider' value='".count($file_names)."' onclick='create_file()'>Valider</button>";
-                echo "</div>";
+                echo "
+                <div id=choice>
+                    Créer un fichier avec les références séléctionnée :
+                    <input type='radio' name='drone' value='HTML' id='HTML' checked><label for='HTML'>HTML</label>
+                    <input type='radio' name='drone' value='PDF' id='PDF'><label for='PDF'>PDF</label>
+                    <button name='boutton' id='valider' value='".count($file_names)."' onclick='create_file()'>Valider</button>
+                </div>
+                ";
 
                 //Give the user the ability to check his references
                 echo '<div id="intro">Voici vos références validées par vos référents :</div>';
                 for($i=1; $i<count($file_names); $i++){
                     show_ref($i);
                 }
-                echo "</form>";
             }
         }
 
         show_all_ref();
-
         ?>
     </body>
 </html>
