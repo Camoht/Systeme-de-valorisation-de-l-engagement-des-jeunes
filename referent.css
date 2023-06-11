@@ -72,6 +72,18 @@ body{
 	color: #8bb93b;
 	font-size: 100px;
 }
+#selectionjeune a{
+	color:#ec008c;
+}
+#selectionreferent a{
+	color:#8bb93b;
+}
+#selectionconsultant a{
+	color:#00adef;
+}
+#selectionpartenaires a{
+	color:#707176;
+}
 
 #valeuramonengagement{
 	color:white;
@@ -148,6 +160,7 @@ h1{
 	align-items: center;
 	justify-content: center;
 }
+
 #titre{
 	color: white;
 	background-image:linear-gradient(45deg,#8bb93b,#588a03);

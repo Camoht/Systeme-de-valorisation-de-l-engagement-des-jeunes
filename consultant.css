@@ -34,6 +34,24 @@ body{
 	font-size: 25px;
 }
 
+#consultant{
+	text-align:end;
+	color: #00adef;
+	font-size: 100px;
+}
+#selectionjeune a{
+	color:#ec008c;
+}
+#selectionreferent a{
+	color:#8bb93b;
+}
+#selectionconsultant a{
+	color:#00adef;
+}
+#selectionpartenaires a{
+	color:#707176;
+}
+
 .cadre{
 	display:flex;
 	align-items: center;
@@ -160,4 +178,16 @@ h3{
 }
 .box{
 	margin-left: 1580;
+}
+
+#titre{
+	color: white;
+	background-image:linear-gradient(45deg,#00adef,#2c038a);
+	display: inline-block;
+	font-size: 40px;
+	font-family: Arial,sans-serif;
+}
+#explication{
+	color: #2100df;
+	font-size: 20px;
 }

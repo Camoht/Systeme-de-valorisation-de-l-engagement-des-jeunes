@@ -1,6 +1,6 @@
 body{
 	background-color: #f5f5f5;
-	background-image: url('imagepng/logo.png');
+	background-image: url('imagepng/imagejeune.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	
@@ -9,7 +9,7 @@ body{
 	display: flex;
 	width: 1900px;
 	background-color: rgb(196, 193, 193);
-	background-image: url('imagepng/logo.png');
+	background-image: url(imagepng/logo.png);
 	background-repeat: no-repeat;
 	display: inline-block;
 
@@ -67,12 +67,23 @@ body{
 	background-color: #ec008c;
 }
 
-#referent{
+#partenaires{
 	text-align:end;
-	color: #8bb93b;
+	color: #707176;
 	font-size: 100px;
 }
-
+#selectionjeune a{
+	color:#ec008c;
+}
+#selectionreferent a{
+	color:#8bb93b;
+}
+#selectionconsultant a{
+	color:#00adef;
+}
+#selectionpartenaires a{
+	color:#707176;
+}
 #valeuramonengagement{
 	color:white;
 	font-size: 40px;
@@ -152,7 +163,7 @@ h3{
 	margin-left: 550;
 	margin-right: 560;
 	color: white;
-	background-image:linear-gradient(45deg,#8bb93b,#588a03);
+	background-image:linear-gradient(45deg,#484b46,#0f0f0f);
 	font-size: 50px;
 	font-family: Arial,sans-serif;
 	align-items: center;
