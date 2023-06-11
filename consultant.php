@@ -79,13 +79,9 @@
             $ref_id="ref".nb_zero($i).$i.".txt";
             $file=fopen($GLOBALS["File"]["Data"].'/'.$_SESSION["User_id"].'/'.$ref_id, 'r');
 
-            //Check if the reference has been validated by the referent
+            //Don't read first line (corresponding to validated or not)
             $first_lig=fgets($file);
-            if($first_lig=="0\n" || $first_lig=="0"){
-                echo "<br/>Référence non validée par le référent :";
-            } else {
-                echo "<br/>Référence validée par le référent :";
-            }
+
             echo "<div id='text_".$ref_id."'>"."<table>";
             foreach($Table_ref_content as $ref_content){
                 
@@ -152,7 +148,7 @@
             //Display a description of the project
             echo
             "<div>
-                <h3>Descritpion du site</h3>
+                <h3>Description du site</h3>
                 Bienvenue sur le site internet Jeune6.4 ! <br/>
                 Ce site permet aux jeunes de mettre en avant leurs expèriences professionnels (stages, bénévolats, etc...). <br/>
                 Un jeune souhaite vous faire part de ses expériences. <br/>

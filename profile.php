@@ -102,7 +102,7 @@
             //Return 0 if the adress email isn't used by someone else and 1 if it is
 
             $folder_names=scandir('Data/');
-            $folder_names=array_diff($folder_names,[".",".."]);
+            $folder_names=array_diff($folder_names,[".","..", $_SESSION['User_id']]);
             
             //Explore data files
             foreach ($folder_names as $user_id){
@@ -164,9 +164,7 @@
             else if(format_mail()==1){
                 echo"L'adresse email fournie est erronée. <br/>";
             }
-        
-        
-        
+
             else{
                 //Change data files
                 $file = fopen($GLOBALS["File"]["Data"]."/".$_SESSION["User_id"]."/".$GLOBALS["File"]["inData"][0], 'w');

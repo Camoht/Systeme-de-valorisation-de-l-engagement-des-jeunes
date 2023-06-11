@@ -38,7 +38,7 @@
             echo "
             <table class='texte'>
                 <tr>
-                    <td>Données de l élève :</td>
+                    <td>Données de l'élève :</td>
             ";
             $ligneCount = 0;
             if(file_exists($userPath)){
@@ -122,7 +122,7 @@
 
             if(file_exists($refPath)){
                 $refFile = fopen($refPath, 'r+');
-                echo "<tr><td>Expérience : </td></tr>";
+                echo "<tr><td><br/></td></tr><tr><td>Expérience :</td></tr>";
                 echo("<form method='POST'>");
 
                 //Display dat's information

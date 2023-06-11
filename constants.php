@@ -20,6 +20,7 @@
     $GLOBALS["File"]["Ask_reference"]["php"]="request.php";
     $GLOBALS["File"]["Ask_reference"]["js"][0]="link.js";
     $GLOBALS["File"]["Ask_reference"]["js"][1]="checkboxes.js";
+    $GLOBALS["File"]["Confirm_reference"]["php"]="referent.php";
         //Xavier
     $GLOBALS["File"]["Visitor_welcome"]["php"][0]="visitor_objectives.php";
     $GLOBALS["File"]["Visitor_welcome"]["php"][1]="visitor_partners.php";

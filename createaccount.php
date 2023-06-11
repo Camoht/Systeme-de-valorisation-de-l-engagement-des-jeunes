@@ -143,7 +143,6 @@
                 echo"L'adresse email fournie est erronée. <br/>";
             }
             else{
-                echo 'bibu';
                 //Create the data file of the new user
                 $folder_names=scandir($GLOBALS["File"]["Data"].'/');
                 $folder_names=array_diff($folder_names,[".",".."]);
@@ -155,6 +154,13 @@
                 fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
                 
                 fclose($file);
+
+                //Go to
+                session_start();
+                $_SESSION["User_id"]=nb_zero($users_number).$users_number;
+                header('Location: Consultants.html');
+                //$GLOBALS["File"]["Student_welcome"]["php"]
+                exit();
             }
         }
         ?>

@@ -176,7 +176,7 @@
                 echo "</div>";
 
                 //Give the user the ability to check his references
-                echo '<div id="intro">Voici vos références validées par vos référents :</div>';
+                echo '<div id="intro">Veuillez sélectionner les références validées que vous souhaitez partager :</div>';
                 for($i=1; $i<count($file_names); $i++){
                     show_ref($i);
                 }
@@ -193,12 +193,10 @@
                     }
 
                     //Create absolute link
-                    $chemin = $_SERVER['SCRIPT_NAME'];
-                    $relativLink = $chemin.$GLOBALS["File"]["Share_references"]["php"]."?email=".$_POST['email']."&button_link=";
+                    $relativLink = dirname($_SERVER['SCRIPT_NAME'])."/".$GLOBALS["File"]["Consultant"]["php"]."?email=".$_POST['email']."&button_link=".$idref;
                     $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
                     $adresseSite .= $_SERVER['HTTP_HOST'];
                     $completeadresse = $adresseSite . $relativLink;
-                    
                     
                     //Send the link
                     $to = $_POST['email'];
