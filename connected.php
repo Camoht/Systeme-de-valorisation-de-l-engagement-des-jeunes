@@ -60,7 +60,7 @@
                         <td><button type='submit' name='submit_send'><a href=".$GLOBALS["File"]["Share_references"]["php"].">Sélectionner</a></button></td>
                     </tr>
                     <tr>
-                        <td>Imprimer mes référence :</td>
+                        <td>Imprimer mes références :</td>
                         <td><button type='submit' name='submit_include'><a href=".$GLOBALS["File"]["Print_references"]["php"].">Sélectionner</a></button></td>
                     </tr>
                 </table>
