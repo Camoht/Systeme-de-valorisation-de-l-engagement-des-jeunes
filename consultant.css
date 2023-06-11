@@ -188,3 +188,15 @@ h3{
 	align-items: center;
 	justify-content: center;
 }
+
+#titre{
+	color: white;
+	background-image:linear-gradient(45deg,#00adef,#2c038a);
+	display: inline-block;
+	font-size: 40px;
+	font-family: Arial,sans-serif;
+}
+#explication{
+	color: #2100df;
+	font-size: 20px;
+}
