@@ -32,7 +32,9 @@
     $GLOBALS["File"]["Change_profil"]["php"]="profile.php";
         //Camille
     $GLOBALS["File"]["Consultant_welcome"]["html"]="";
-    $GLOBALS["File"]["Print_references"]["php"]="references.php";
+    $GLOBALS["File"]["Look_references"]["php"]="look_references.php";
+    $GLOBALS["File"]["Print_references"]["php"]="print_references.php";
+    $GLOBALS["File"]["Share_references"]["php"]="share_references.php";
     $GLOBALS["File"]["Print_references"]["js"]="createRefFile.js";
     $GLOBALS["File"]["Print_references"]["js_link"]="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js";
 
