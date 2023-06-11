@@ -43,6 +43,32 @@
     //HTML ofter used
     $BACK = "<button type='submit' name='submit_send'><a href=".$GLOBALS["File"]["Student_welcome"]["php"].">Retour</a></button>";
 
+
+    $BANDEAUACCUEIL='     
+    <div class="bandeau">
+        <table class="entete">
+            <tr id="accueil">
+                <td>ACCUEIL</td>
+            </tr>
+            <tr id="valeuramonengagement">
+                <td>Pour faire de l\'engagement une valeur</td>
+            </tr>
+        </table>
+    </div>
+    <form method="POST" action="#">
+        <div class="selection">
+            <table class="selection tab">
+                <tr>
+                    <td id="selectionjeune"><a href="'.$GLOBALS["File"]["Student_welcome"]["html"].'">JEUNE</a></td>
+                    <td id="selectionreferent"><a href="'.$GLOBALS["File"]["Referent_welcome"].'">RÉFÉRENT</a></td>
+                    <td id="selectionconsultant"><a href="'.$GLOBALS["File"]["Consultant_welcome"]["html"].'">CONSULTANT</a></td>
+                    <td id="selectionpartenaires"><a href="'.$GLOBALS["File"]["Visitor_welcome"]["php"][1].'">PARTENAIRES</a></td>
+                </tr>
+            </table>
+        </div>
+    </form>';
+
+
     $BANDEAUJEUNE='     
     <div class="bandeau">
         <table class="entete">
