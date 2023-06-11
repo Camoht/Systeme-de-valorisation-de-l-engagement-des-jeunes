@@ -149,15 +149,19 @@
             echo
             "<div>
                 <h3>Description du site</h3>
-                Bienvenue sur le site internet Jeune6.4 ! <br/>
-                Ce site permet aux jeunes de mettre en avant leurs expèriences professionnels (stages, bénévolats, etc...). <br/>
-                Un jeune souhaite vous faire part de ses expériences. <br/>
+                <div class='texte'>
+                    Bienvenue sur le site internet Jeune6.4 ! <br/>
+                    Ce site permet aux jeunes de mettre en avant leurs expèriences professionnels (stages, bénévolats, etc...). <br/>
+                    Un jeune souhaite vous faire part de ses expériences. <br/>
+                </div>
             </div>";
 
             //Display the student's data
             echo "<div>";
             echo "<h3>Description du jeune</h3>";
+            echo "<div class='texte'>";
             show_student();
+            echo "</div>";
             echo "</div>";
 
             //Get the names of references' files (Get the name of user's files and delete thoses who are not references' files, like "." and "..")
@@ -170,11 +174,13 @@
 
             //Get validated references' id
             echo "<h3>Voici ses références</h3>";
+            echo "<div class='texte'>";
             for($i=1; $i<count($file_names); $i++){
                 if(isset($_GET[$i])){
                     show_ref($i);
                 }
             }
+            echo "</div>";
         }
 
         show_all_ref();
