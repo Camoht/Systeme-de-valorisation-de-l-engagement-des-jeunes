@@ -89,6 +89,7 @@
             fclose($file);
         }
         show_student();
+        echo $BACK;
 
         function empty_field(){
             //Function verifying if the fields are empty or not.

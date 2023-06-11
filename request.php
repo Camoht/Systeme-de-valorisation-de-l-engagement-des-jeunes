@@ -89,6 +89,7 @@
       <button type='submit' name='envoyer'>Envoyer</button>
     </form>
     <?php
+      echo $BACK;
       if(isset($_POST['envoyer'])){
         //Verification of the number of references for this user
         $refNumberPath = $GLOBALS["File"]["Data"]."/" . $_SESSION["User_id"];

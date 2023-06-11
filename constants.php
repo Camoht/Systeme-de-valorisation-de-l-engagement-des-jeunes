@@ -41,6 +41,8 @@
     $GLOBALS["File"]["Print_references"]["js_link"]="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js";
 
     //HTML ofter used
+    $BACK = "<button type='submit' name='submit_send'><a href=".$GLOBALS["File"]["Student_welcome"]["php"].">Retour</a></button>";
+
     $BANDEAUJEUNE='     
     <div class="bandeau">
         <table class="entete">
