@@ -190,6 +190,7 @@
         }
 
         show_all_ref();
+        echo $BACK;
         ?>
     </body>
 </html>
