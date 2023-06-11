@@ -14,38 +14,7 @@
         <?php
         include 'constants_js.php';
         echo $BANDEAUJEUNE;
-        ?>
 
-        <!--Give to the user, the ability to give informations-->
-        <form id="choice">
-            <div class="cadre">
-                <table class="texte">
-                    <tr>
-                        <td>NOM: </td>
-                        <td><input type='text' name='name' id="name"/></td>
-                    </tr>
-                    <tr>
-                        <td>PRENOM: </td>
-                        <td><input type='text' name='surname' id="surname"/></td>
-                    </tr>
-                    <tr>
-                        <td>DATE DE NAISSANCE: </td>
-                        <td><input type='text' name='birth' id="birth"/></td>
-                    </tr>
-                    <tr>
-                        <td>EMAIL: </td>
-                        <td><input type='text' name='email' id="email"/></td>
-                    </tr>
-                    <tr>
-                        <td>MOT DE PASSE: </td>
-                        <td><input type='text' name='password' id="password"/></td>
-                    </tr>
-                    <tr><td><button type='submit' name='submit'>Envoyer</button></td></tr>
-                </table>
-            </div>
-        </form>
-
-        <?php
         if(isset($_POST["name"])){
             function empty_field(){
                 //Function verifying if the fields are empty or not.
@@ -158,11 +127,39 @@
                 //Go to
                 session_start();
                 $_SESSION["User_id"]=nb_zero($users_number).$users_number;
-                header('Location: Consultants.html');
-                //$GLOBALS["File"]["Student_welcome"]["php"]
+                header('Location: '.$GLOBALS["File"]["Student_welcome"]["php"]);
                 exit();
             }
         }
         ?>
+
+        <!--Give to the user, the ability to give informations-->
+        <form id="choice">
+            <div class="cadre">
+                <table class="texte">
+                    <tr>
+                        <td>NOM: </td>
+                        <td><input type='text' name='name' id="name"/></td>
+                    </tr>
+                    <tr>
+                        <td>PRENOM: </td>
+                        <td><input type='text' name='surname' id="surname"/></td>
+                    </tr>
+                    <tr>
+                        <td>DATE DE NAISSANCE: </td>
+                        <td><input type='text' name='birth' id="birth"/></td>
+                    </tr>
+                    <tr>
+                        <td>EMAIL: </td>
+                        <td><input type='text' name='email' id="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>MOT DE PASSE: </td>
+                        <td><input type='text' name='password' id="password"/></td>
+                    </tr>
+                    <tr><td><button type='submit' name='submit'>Envoyer</button></td></tr>
+                </table>
+            </div>
+        </form>
     </body>
 </html>

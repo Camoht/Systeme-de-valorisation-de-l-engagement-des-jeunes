@@ -14,6 +14,32 @@
         echo $BANDEAUJEUNE;
         include 'constants_js.php';
         session_start();
+
+        //Display error notes if the linked functions return 1
+        if(isset($_POST['name'])){
+            if (empty_field()==1){
+                echo"Le remplissage de tous les champs est obligatoire. <br/>";
+            }
+            else if (format_date()==1){
+                echo"Vous devez écrire votre date de naissance au format suivant : dd/mm/aaaa <br/>";
+            }
+            else if (reused_mail()==1){
+                echo"L'adresse email est déjà utilisée par un autre compte. <br/>";
+            }
+            else if(format_mail()==1){
+                echo"L'adresse email fournie est erronée. <br/>";
+            }
+
+            else{
+                //Change data files
+                $file = fopen($GLOBALS["File"]["Data"]."/".$_SESSION["User_id"]."/".$GLOBALS["File"]["inData"][0], 'w');
+                fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
+
+                //Go to
+                header('Location: '.$GLOBALS["File"]["Student_welcome"]["php"]);
+                exit();
+            }
+        }
         
         function show_student(){
             // Show the content of user's file.
@@ -147,32 +173,6 @@
                 return "0";
             } else {
                 return "";
-            }
-        }
-
-        //Display error notes if the linked functions return 1
-        if(isset($_POST['name'])){
-            if (empty_field()==1){
-                echo"Le remplissage de tous les champs est obligatoire. <br/>";
-            }
-            else if (format_date()==1){
-                echo"Vous devez écrire votre date de naissance au format suivant : dd/mm/aaaa <br/>";
-            }
-            else if (reused_mail()==1){
-                echo"L'adresse email est déjà utilisée par un autre compte. <br/>";
-            }
-            else if(format_mail()==1){
-                echo"L'adresse email fournie est erronée. <br/>";
-            }
-
-            else{
-                //Change data files
-                $file = fopen($GLOBALS["File"]["Data"]."/".$_SESSION["User_id"]."/".$GLOBALS["File"]["inData"][0], 'w');
-                fwrite($file, $_POST["name"]."\n".$_POST["surname"]."\n".$_POST["birth"]."\n".$_POST["email"]."\n".$_POST["password"]);
-
-                //Go to
-                header('Location: '.$GLOBALS["File"]["Student_welcome"]["php"]);
-                exit();
             }
         }
         ?>
