@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-
 <html>
     <head>
         <?php
         //Include some files
         include 'constants.php';
-        echo '<link rel="stylesheet" type="text/css" href='.$GLOBALS["File"]["css"]["Student"].'>';
-        echo '<script src='.$GLOBALS["File"]["Ask_reference"]["js"][0].'></script>'
+        echo '<link rel="stylesheet" type="text/css" href='.$GLOBALS["File"]["css"]["Consultant"].'>';
         ?>
 
-        <title>Mes références</title>
+        <title>Consultant</title>
         <meta charset="utf-8">
     </head>
     
@@ -18,9 +15,8 @@
 
         <?php
 
-        echo $BANDEAUJEUNE;
+        echo $BANDEAUCONSULTANT;
         session_start();
-        echo '<h3>Mes références</h3>';
         
         function nb_zero($i){
             // Use to create a number with 3 figures.
@@ -86,11 +82,10 @@
             //Check if the reference has been validated by the referent
             $first_lig=fgets($file);
             if($first_lig=="0\n" || $first_lig=="0"){
-                echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'" hidden>'; //to avoid problems with the js code
-                return FALSE;
+                echo "<br/>Référence non validée par le référent :";
+            } else {
+                echo "<br/>Référence validée par le référent :";
             }
-
-            echo '<input type="checkbox" id="'.$ref_id.'" name="'.$i.'">';
             echo "<div id='text_".$ref_id."'>"."<table>";
             foreach($Table_ref_content as $ref_content){
                 
@@ -152,9 +147,24 @@
         }
 
         function show_all_ref(){
-            // Create a list of references that the student can choose.
+            // Create a list of references to show.
 
-            //Get the names of references' files (Get the name of user's files and delete thoses who are not references' files like "." and "..")
+            //Display a description of the project
+            echo
+            "<div>
+                <h3>Descritpion du site</h3>
+                Bienvenue sur le site internet Jeune6.4 ! <br/>
+                Ce site permet aux jeunes de mettre en avant leurs expèriences professionnels (stages, bénévolats, etc...). <br/>
+                Un jeune souhaite vous faire part de ses expériences. <br/>
+            </div>";
+
+            //Display the student's data
+            echo "<div>";
+            echo "<h3>Description du jeune</h3>";
+            show_student();
+            echo "</div>";
+
+            //Get the names of references' files (Get the name of user's files and delete thoses who are not references' files, like "." and "..")
             $file_names=scandir($GLOBALS["File"]["Data"].'/'.$_SESSION["User_id"].'/');
             foreach($file_names as $file){
                 if(substr($file, 0, 3)!="ref"){
@@ -162,66 +172,11 @@
                 }
             }
 
-            //Show the content of references' files (if they are)
-            if(count($file_names)==0){
-                echo "Vous n'avez pas de références à choisir<br/>";
-                echo "Veuillez en créer<br/>";
-            } else {
-
-                //Ask what the student whant to do
-                echo "<div id=choice>";
-                echo "<form method='POST' action=#>";
-                echo "Veuillez indiquer l'email du Consultant auquel vous voulez envoyer les références séléctionnées :<input type='text' name='email'>";
-                echo "<button type=submit name='button_link'>Envoyer</button>";
-                echo "</div>";
-
-                //Give the user the ability to check his references
-                echo '<div id="intro">Voici vos références validées par vos référents :</div>';
-                for($i=1; $i<count($file_names); $i++){
+            //Get validated references' id
+            echo "<h3>Voici ses références</h3>";
+            for($i=1; $i<count($file_names); $i++){
+                if(isset($_GET[$i])){
                     show_ref($i);
-                }
-                echo "</form>";
-
-                if(isset($_POST['button_link'])){
-
-                    //Get validated references' id
-                    $idref="";
-                    for($i=1; $i<count($file_names); $i++){
-                        if(isset($_POST[$i])){
-                            $idref.="&".$i."=on";
-                        }
-                    }
-
-                    //Create absolute link
-                    $chemin = $_SERVER['SCRIPT_NAME'];
-                    $relativLink = $chemin.$GLOBALS["File"]["Share_references"]["php"]."?email=".$_POST['email']."&button_link=";
-                    $adresseSite = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-                    $adresseSite .= $_SERVER['HTTP_HOST'];
-                    $completeadresse = $adresseSite . $relativLink;
-                    
-                    
-                    //Send the link
-                    $to = $_POST['email'];
-                    $from ="leprojetjeunes64@gmail.com";
-                    $subject = "Partge de l'engagement d'un jeune";
-                    $message = "Bonjour,\n
-                    Un jeune vous partage son expérience !\n\n
-                    Le projet Jeunes 6.4 a pour but de mettre en avant des expériences professionnelles auprès de recruteurs,
-                    pour cela les jeunes font appel à leur référent de mission pour valider leurs missions et leurs compétences.\n
-                    C'est là que vous intervenez ! Un jeune a choisi de vous partager sonexpérience. Vous pouvez consulter celle-ci en cliquant sur le lien ci-dessous :\n"
-                    . $completeadresse;
-                    $headers = ['From' => $from];
-                    
-            
-                    //Notice the user the status of the mail
-                    if(mail($to, $subject, $message, $headers)){
-                      echo "Le mail a bien été envoyé !";
-                    }
-                    else{
-                      echo "Le mail n'a pas pu être envoyé ... Vous pouvez cependant copier ce lien et l'envoyer manuellement à votre référent : ";
-                      echo "<a href='".$GLOBALS["File"]["Consultant"]["php"]."?email=".$_POST['email']."&button_link=".$idref."' id='link'>Lien vers la demande</a>";
-                      echo "<button id='copyButton' onclick='copyLink()'>Copier le lien</button>";
-                    }
                 }
             }
         }
