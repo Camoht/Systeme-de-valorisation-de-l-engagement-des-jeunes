@@ -18,14 +18,14 @@
                 <td>A qui s'adresse-t'il?</td>
             </tr>
             <tr>
-                <td>D'une opportunité : celle qu'un engagement quel qu'il soit puisse être considérer à sa juste valeur!</td>
-                <td>A vous, jeunes entre 16 et 30 ans, qui vous êtes investis spontanément dans une association ou dans tout type d'action formelle ou informelle, et qui avez partagé de votre temps, de votre temps, de votre énergie, pour apporter un soutien, une aide, une compétence.</td>
-                <td>A vous, employeurs, recruteurs en ressources humaines, représentants d'organismes de formation, qui recevez des jeunes, pour un emploi, un stage, un cursus de qualification, pour qui le savoir-être constitue le premier fondement de toute capacité humaine.</td>
+                <td>D'une opportunité : celle qu'un engagement quel qu'il soit puisse être considéré à sa juste valeur!</td>
+                <td>À vous, jeunes entre 16 et 30 ans, qui vous êtes investis spontanément dans une association ou dans tout type d'action formelle ou informelle, et qui avez partagé de votre temps, de votre énergie, pour apporter un soutien, une aide, une compétence.</td>
+                <td>À vous, employeurs, recruteurs en ressources humaines, représentants d'organismes de formation, qui recevez des jeunes, pour un emploi, un stage, un cursus de qualification, pour qui le savoir-être constitue le premier fondement de toute capacité humaine.</td>
                 
             </tr>
             <tr>
-            <td>Toute expérience est source d'enrichissement et se doit d'être reconnu largement.</td>
-            <td>A vous, responsable de structures ou référent d'un jour, qui avez bénéficié même ponctuellement de cette implication citoyenne!</td>
+            <td>Toute expérience est source d'enrichissement et se doit d'être reconnue largement.</td>
+            <td>À vous, responsable de structures ou référent d'un jour, qui avez bénéficié même ponctuellement de cette implication citoyenne!</td>
                 
             <tr>
                 <td>Elle révèle un potentiel, l'expression d'un savoir-être à concrétiser.</td>
